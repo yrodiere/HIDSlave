@@ -1,0 +1,6 @@
+dump readable with hcidump :
+
+hcidump -r dump_file_name
+
+-x : display hex
+-X : display hex + ASCII
