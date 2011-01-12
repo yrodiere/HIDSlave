@@ -1,0 +1,3 @@
+xmodmap -e "keycode 135 = Mode_switch Multi_key"
+
+

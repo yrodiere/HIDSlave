@@ -1,0 +1,4 @@
+?package(xkbd): needs="x11" section="Input Methods" title="Virtual Keyboard" command="/usr/bin/xkbd" 
+?package(xkbd): needs="x11" section="Input Methods" title="Virtual Keyboard (US) " command="/usr/bin/xkbd -k /usr/share/xkbden_US.qwerty.xkbd"
+?package(xkbd): needs="x11" section="Input Methods" title="Virtual Keyboard (fitaly) " command="/usr/bin/xkbd -k /usr/share/xkbd/en_all.fitaly.xkbd" 
+?package(xkbd): needs="x11" section="Input Methods" title="Virtual Keyboard (tiny)" command="/usr/bin/xkbd -k /usr/share/xkbd/en_US.qwerty.tiny.xkbd"

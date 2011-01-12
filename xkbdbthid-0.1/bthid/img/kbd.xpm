@@ -1,0 +1,21 @@
+/* XPM */
+static char * unknown[] = {
+"24 14 4 1",
+"  s None c None",
+". c #000000",
+"# c #aaaaaa",
+"a c #888888",
+"                        ",
+"........................",
+".aaaaaaaaaaaaaaaaaaaaaa.",
+".a#.#.#.#.#.#.#.#.#...#.",
+".aaaaaaaaaaaaaaaaaaaaaa.",
+".a.a.#.#.#.#.#.#.#.#..a.",
+".aaaaaaaaaaaaaaaaaaaaaa.",
+".a.a.#.#.#.#.#.#.#....#.",
+".aaaaaaaaaaaaaaaaaaaaaa.",
+".a..#.#.#.#.#.#.#.#...#.",
+".aaaaaaaaaaaaaaaaaaaaaa.",
+".aa..................a..",
+" .aa#################a. ",
+"  ....................  "};

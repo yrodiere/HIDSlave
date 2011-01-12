@@ -1,0 +1,450 @@
+<global>
+# comment this old for plain old aliased fonts
+font   mono-7|9x15|fixed
+#font 9x15
+
+
+#col  100:0:0
+down_col  100:100:200
+#txt_col  200:15:0
+#width  xxx
+#height xxx
+#button_style plain
+button_style rounded
+
+</global>
+<layout>
+<row>
+	<key>
+		default  ESC
+		default_ks  Escape
+		shift  ESC
+		shift_ks  Escape
+		key_span_width 3 
+		
+		bg grey60
+	</key>
+	<key>
+		default  \
+		default_ks  backslash
+		shift  |
+		shift_ks  bar
+		
+		bg grey70
+	</key>
+	<key>
+		default  z
+		default_ks  z
+		shift  Z
+		shift_ks  Z
+		
+	</key>
+	<key>
+		default  v
+		default_ks  v
+		shift  V
+		shift_ks  V
+		
+	</key>
+	<key>
+		default  c
+		default_ks  c
+		shift  C
+		shift_ks  C
+		
+	</key>
+	<key>
+		default  h
+		default_ks  h
+		shift  H
+		shift_ks  H
+		
+	</key>
+	<key>
+		default  w
+		default_ks  w
+		shift  W
+		shift_ks  W
+		
+	</key>
+	<key>
+		default  k
+		default_ks  k
+		shift  K
+		shift_ks  K
+		
+	</key>
+	<key>
+		default  ;
+		default_ks  semicolon
+		shift  :
+		shift_ks  colon
+		
+		bg grey70
+	</key>
+	<key>
+		default  1
+		default_ks  1
+		shift  !
+		shift_ks  exclam
+		
+	</key>
+	<key>
+		default  2
+		default_ks  2
+		shift  @
+		shift_ks  at
+		
+	</key>
+	<key>
+		default  <--
+		default_ks  BackSpace
+		shift  <--
+		shift_ks  BackSpace
+		key_span_width 3 
+		bg grey60
+	</key>
+</row>
+<row>
+	<key>
+		default  SHF
+		default_ks  Shift_L
+		shift  SHF
+		shift_ks  Shift_L
+		key_span_width 3 
+		bg grey60
+	</key>
+	<key>
+		default  '
+		default_ks  quoteright
+		shift  "
+		shift_ks  quotedbl
+		
+		bg grey70
+	</key>
+	<key>
+		default  f
+		default_ks  f
+		shift  F
+		shift_ks  F
+		
+	</key>
+	<key>
+		default  i
+		default_ks  i
+		shift  I
+		shift_ks  I
+		
+	</key>
+	<key>
+		default  t
+		default_ks  t
+		shift  T
+		shift_ks  T
+		
+	</key>
+	<key>
+		default  a
+		default_ks  a
+		shift  A
+		shift_ks  A
+		
+	</key>
+	<key>
+		default  l
+		default_ks  l
+		shift  L
+		shift_ks  L
+		
+	</key>
+	<key>
+		default  y
+		default_ks  y
+		shift  Y
+		shift_ks  Y
+		
+	</key>
+	<key>
+		default  ,
+		default_ks  comma
+		shift  <
+		shift_ks  less
+		
+		bg grey70
+	</key>
+	<key>
+		default  3
+		default_ks  3
+		shift  #
+		shift_ks  numbersign
+		
+	</key>
+	<key>
+		default  4
+		default_ks  4
+		shift  $
+		shift_ks  dollar
+		
+	</key>
+	<key>
+		default  SHF
+		default_ks  Shift_R
+		shift  SHF
+		shift_ks  Shift_R
+		key_span_width 3 
+		bg grey60
+	</key>
+</row>
+<row>
+	<key>
+		default  Tab
+		default_ks  Tab
+		shift  T
+		shift_ks  Tab
+		key_span_width 3 
+		bg grey60
+	</key>
+	<key>
+		default_ks  space
+		shift_ks  space
+		key_span_width 3 
+	</key>
+	<key>
+		default  n
+		default_ks  n
+		shift  N
+		shift_ks  N
+		
+	</key>
+	<key>
+		default  e
+		default_ks  e
+		shift  E
+		shift_ks  E
+		
+	</key>
+	<key>
+		default_ks  space
+		shift_ks  space
+		key_span_width 3	
+	</key>
+	<key>
+		default  5
+		default_ks  5
+		shift  %
+		shift_ks  percent
+		
+	</key>
+	<key>
+		default  6
+		default_ks  6
+		shift  ^
+		shift_ks  asciicircum
+		
+	</key>
+	<key>
+		default  RET
+		default_ks  Return
+		shift  RET
+		shift_ks  Return
+		key_span_width 3 
+		bg grey60
+	</key>
+</row>
+<row>
+	<key>
+		default  Caps
+		default_ks  Caps_Lock
+		shift  Caps
+		shift_ks  Caps_Lock
+		key_span_width 3 
+		bg grey60
+	</key>
+	<key>
+		default  `
+		default_ks  grave
+		shift  ~
+		shift_ks  asciitilde
+		
+		bg grey70
+	</key>
+	<key>
+		default  g
+		default_ks  g
+		shift  G
+		shift_ks  G
+		
+	</key>
+	<key>
+		default  d
+		default_ks  d
+		shift  D
+		shift_ks  D
+		
+	</key>
+	<key>
+		default  o
+		default_ks  o
+		shift  O
+		shift_ks  O
+		
+	</key>
+	<key>
+		default  r
+		default_ks  r
+		shift  R
+		shift_ks  R
+		
+	</key>
+	<key>
+		default  s
+		default_ks  s
+		shift  S
+		shift_ks  S
+		
+	</key>
+	<key>
+		default  b
+		default_ks  b
+		shift  B
+		shift_ks  B
+		
+	</key>
+	<key>
+		default  .
+		default_ks  period
+		shift  >
+		shift_ks  greater
+		
+		bg grey70
+	</key>
+	<key>
+		default  7
+		default_ks  7
+		shift  &
+		shift_ks  ampersand
+		
+	</key>
+	<key>
+		default  8
+		default_ks  8
+		shift  *
+		shift_ks  asterisk
+		
+	</key>
+	<key>
+		default  [
+		default_ks  bracketleft
+		shift  {
+		shift_ks  braceleft
+		
+		bg grey60
+	</key>
+	<key>
+		default  =
+		default_ks  equal
+		shift  +
+		shift_ks  plus
+		
+		bg grey70
+	</key>
+	<key>
+		default  ]
+		default_ks  bracketright
+		shift  }
+		shift_ks  braceright
+		
+		bg grey60
+	</key>
+</row>
+<row>
+	<key>
+		default  CTL
+		default_ks  Control_L
+		shift  CTL
+		shift_ks  Control_L
+		key_span_width 3 
+		bg grey60
+	</key>
+	<key>
+		default  /
+		default_ks  slash
+		shift  ?
+		shift_ks  question
+		
+		bg grey70
+	</key>
+	<key>
+		default  q
+		default_ks  q
+		shift  Q
+		shift_ks  Q
+		
+	</key>
+	<key>
+		default  j
+		default_ks  j
+		shift  J
+		shift_ks  J
+		
+	</key>
+	<key>
+		default  u
+		default_ks  u
+		shift  U
+		shift_ks  U
+		
+	</key>
+	<key>
+		default  m
+		default_ks  m
+		shift  M
+		shift_ks  M
+		
+	</key>
+	<key>
+		default  p
+		default_ks  p
+		shift  P
+		shift_ks  P
+		
+	</key>
+	<key>
+		default  x
+		default_ks  x
+		shift  X
+		shift_ks  X
+		
+	</key>
+	<key>
+		default  -
+		default_ks  minus
+		shift  _
+		shift_ks  underscore
+		
+		bg grey70
+	</key>
+	<key>
+		default  9
+		default_ks  9
+		shift  (
+		shift_ks  parenleft
+		
+	</key>
+	<key>
+		default  0
+		default_ks  0
+		shift  )
+		shift_ks  parenright
+		
+	</key>
+	<key>
+		default  ALT
+		default_ks  Alt_L
+		shift  ALT
+		shift_ks  Alt_L
+		key_span_width 3 
+		bg grey60
+	</key>
+</row>
+</layout>

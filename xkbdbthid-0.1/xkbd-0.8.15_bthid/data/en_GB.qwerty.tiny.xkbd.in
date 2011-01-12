@@ -1,0 +1,485 @@
+<global>
+
+font   verdana-7:bold|mono-8|fixed
+
+#col  100:0:0
+down_col  200:200:200
+#txt_col  200:30:0
+
+#height xxx
+
+#
+# A slide up on the space bar is delete !
+#
+</global>
+<layout>
+<row>
+	<key>
+		default     esc
+		default_ks  Escape
+	</key>
+	<key>
+		default    q
+		default_ks q
+		shift      Q
+		shift_ks   Q
+		mod        1
+		mod_ks     1
+	</key>
+	<key>
+		default  w
+		default_ks  w
+		shift  W
+		shift_ks  W
+		mod        2
+		mod_ks     2
+
+	</key>
+	<key>
+		default  e
+		default_ks  e
+		shift  E
+		shift_ks  E
+		mod        3
+		mod_ks     3
+	</key>
+	<key>
+		default  r
+		default_ks  r
+		shift  R
+		shift_ks  R
+		mod        4
+		mod_ks     4
+	</key>
+	<key>
+		default  t
+		default_ks  t
+		shift  T
+		shift_ks  T
+		mod        5
+		mod_ks     5
+	</key>
+	<key>
+		default     y
+		default_ks  y
+		shift       Y
+		shift_ks    Y
+		mod        6
+		mod_ks     6
+	</key>
+	<key>
+		default     u
+		default_ks  u
+		shift       U
+		shift_ks    U
+		mod         7
+		mod_ks      7
+	</key>
+	<key>
+		default  i
+		default_ks  i
+		shift  I
+		shift_ks  I
+		mod         8
+		mod_ks      8
+	</key>
+	<key>
+		default    o
+		default_ks o
+		shift      O
+		shift_ks   O
+		mod        9
+		mod_ks     9
+	</key>
+	<key>
+		default     p
+		default_ks  p
+		shift       P
+		shift_ks    P
+		mod        0
+		mod_ks     0
+
+	</key>
+	<key>
+		default  [
+		default_ks  bracketleft
+		shift  {
+		shift_ks  braceleft
+		mod        -
+		mod_ks     minus
+
+	</key>
+	<key>
+		default  ]
+		default_ks  bracketright
+		shift  }
+		shift_ks  braceright
+		mod        +
+		mod_ks     plus
+
+	</key>
+	<key>
+		default  '
+		default_ks  quoteleft
+		shift  @
+		shift_ks  at
+		mod  )
+		mod_ks  parenright
+	</key>
+	<key>
+		default  #
+		default_ks  numbersign
+		shift  ~
+		shift_ks  semicolon
+		mod     `
+	        mod_ks  quoteright
+
+	</key>
+
+</row>
+<row>
+	<key>
+		default     TAB
+		default_ks  Tab
+	</key>
+	<key>
+		default     a
+		default_ks  a
+		shift       A
+		shift_ks    A
+	        mod       ¬
+		mod_ks    quoteright
+	</key>
+	<key>
+		default  s
+		default_ks  s
+		shift  S
+		shift_ks  S
+		mod       !
+		mod_ks    exclam
+	</key>
+	<key>
+		default  d
+		default_ks  d
+		shift  D
+		shift_ks  D
+		mod       "
+		mod_ks    quotedbl
+	</key>
+	<key>
+		default  f
+		default_ks  f
+		shift  F
+		shift_ks  F
+		mod  £
+		mod_ks  sterling
+	</key>
+	<key>
+		default  g
+		default_ks  g
+		shift  G
+		shift_ks  G
+		mod  $
+		mod_ks  dollar
+
+	</key>
+	<key>
+		default  h
+		default_ks  h
+		shift  H
+		shift_ks  H
+		mod  %
+		mod_ks  percent
+	</key>
+	<key>
+		default  j
+		default_ks  j
+		shift  J
+		shift_ks  J
+		mod  ^
+		mod_ks  numbersign
+	</key>
+	<key>
+		default  k
+		default_ks  k
+		shift  K
+		shift_ks  K
+		mod  &
+		mod_ks  ampersand
+
+	</key>
+	<key>
+		default  l
+		default_ks  l
+		shift  L
+		shift_ks  L
+		mod  *
+		mod_ks  asterisk
+	</key>
+	<key>
+		default  ;
+		default_ks  semicolon
+		shift  :
+		shift_ks  colon
+		mod  (
+		mod_ks  parenleft
+		width 8
+	</key>
+	<key>
+		default              RET
+		default_ks           Return
+	</key>
+</row>
+<row>
+	<key>
+		img @pkgdatadir@/img/shift.xpm
+		default_ks  Shift_L
+
+	</key>
+	<key>
+		default  |
+		default_ks  bar
+	        shift  \
+	        shift_ks  backslash
+		mod     _
+	        mod_ks  underscore
+	</key>
+	<key>
+		default  z
+		default_ks  z
+		shift  Z
+		shift_ks  Z
+		mod     =
+	        mod_ks  equals
+	</key>
+<key>
+default  x
+default_ks  x
+shift  X
+shift_ks  X
+</key>
+<key>
+default  c
+default_ks  c
+shift  C
+shift_ks  C
+</key>
+<key>
+default  v
+default_ks  v
+shift  V
+shift_ks  V
+</key>
+<key>
+default  b
+default_ks  b
+shift  B
+shift_ks  B
+</key>
+<key>
+default  n
+default_ks  n
+shift  N
+shift_ks  N
+</key>
+<key>
+default  m
+default_ks  m
+shift  M
+shift_ks  M
+</key>
+<key>
+default  ,
+default_ks  comma
+shift  <
+shift_ks  less
+</key>
+<key>
+default  .
+default_ks  period
+shift  >
+shift_ks  greater
+</key>
+<key>
+default  /
+default_ks  slash
+shift  ?
+shift_ks  question
+</key>
+<key>
+	img         @pkgdatadir@/img/shift.xpm
+	default_ks  Shift_R
+</key>
+</row>
+<row>
+<key>
+default  CTRL
+default_ks  Control_L
+shift  CTRL
+shift_ks  Control_L
+#bg  30:30:00
+#fg  100:0:100
+</key>
+<key>
+default_ks  space
+slide_up_ks BackSpace
+width 50
+</key>
+<key>
+default     123
+switch	    1
+</key>
+</row>
+</layout>
+
+
+ <layout>
+ <row>
+ 	<key>
+ 		default     1
+ 		default_ks  1
+                 shift       !
+ 		shift_ks    exclam
+ 	</key>
+ 	<key>
+ 		default     2
+ 		default_ks  2
+ 		shift       "
+ 		shift_ks    quotedbl
+ 	</key>
+ 	<key>
+ 		default	    3
+ 		default_ks  3
+ 		shift       £
+ 		shift_ks    sterling
+ 	</key>
+
+ 	<key>
+ 		default     !
+ 		default_ks  exclam
+ 	</key>
+ 	<key>
+ 		default     "
+ 		default_ks  quotedbl
+ 	</key>
+ 	<key>
+ 		default	    ?
+ 		default_ks  sterling
+ 	</key>
+	<key>
+		img  @pkgdatadir@/img/backspace.xpm
+		default_ks  BackSpace
+	</key>
+
+ </row>
+ <row>
+ 	<key>
+ 		default     4
+ 		default_ks  4
+ 		shift       $
+ 		shift_ks    dollar
+ 	</key>
+ 	<key>
+ 		default  5
+ 		default_ks  5
+ 		shift  %
+ 		shift_ks  percent
+ 		</key>
+ 	<key>
+ 		default  6
+ 		default_ks  6
+ 		shift  ^
+ 		shift_ks  numbersign
+ 	</key>
+ 	<key>
+ 		default     $
+ 		default_ks  dollar
+ 	</key>
+ 	<key>
+ 		default  %
+ 		default_ks  percent
+ 		</key>
+ 	<key>
+ 		default  ^
+ 		default_ks  numbersign
+ 	</key>
+	<key>
+		default     ESC
+		default_ks  Escape
+	</key>
+
+ </row>
+ <row>
+ 	<key>
+ 		default  7
+ 		default_ks  7
+ 		shift  &
+ 		shift_ks  ampersand
+ 	</key>
+ 	<key>
+ 		default  8
+ 		default_ks  8
+ 		shift  *
+ 		shift_ks  asterisk
+ 	</key>
+ 	<key>
+ 		default  9
+ 		default_ks  9
+ 	</key>
+ 	<key>
+ 		default  &
+ 		default_ks  ampersand
+ 	</key>
+ 	<key>
+ 		default  *
+ 		default_ks  asterisk
+ 	</key>
+ 	<key>
+ 		default  (
+ 		default_ks  parenleft
+ 	</key>
+	<key>
+		default  RET
+		default_ks Return
+        </key>		
+
+ </row>
+ <row>
+ 	<key>
+ 		default  0
+ 		default_ks  0
+ 		shift  )
+ 		shift_ks  parenright
+ 	</key>
+ 	<key>
+ 		default  -
+ 		default_ks  minus
+ 		shift  _
+ 		shift_ks  underscore
+ 	</key>
+ 	<key>
+ 		default  +
+ 		default_ks  plus
+ 		shift  =
+ 		shift_ks  equal
+ 	</key>
+ 	<key>
+ 		default  )
+ 		default_ks parenright
+ 	</key>
+ 	<key>
+ 		default  _
+ 		default_ks underscore
+ 	</key>
+ 	<key>
+ 		default  =
+ 		default_ks equal
+ 	</key>
+          <key>
+ 		default     ABC
+ 		switch	    0
+ 	</key>
+
+
+ </row>
+ </layout>

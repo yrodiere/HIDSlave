@@ -26,7 +26,7 @@ sdp_session_t *register_service()
     sdp_record_t *record = sdp_record_alloc();
 
     // set the general service ID
-    sdp_uuid128_create( &svc_uuid, &service_uuid_int );
+    sdp_uuid128_create( &svc_uuid, HID_SVCLASS_ID);//&service_uuid_int );
     sdp_set_service_id( record, svc_uuid );
 
     // make the service record publicly browsable

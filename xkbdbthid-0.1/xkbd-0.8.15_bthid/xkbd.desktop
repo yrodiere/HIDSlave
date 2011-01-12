@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Keyboard
+Comment=Virtual Keyboard
+Exec=xkbd
+Type=Application
+Icon=xkbd.png
+Categories=Panel;Utility;MB
+X-MB-INPUT-MECHANSIM=True

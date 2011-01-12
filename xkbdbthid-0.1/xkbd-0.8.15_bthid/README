@@ -1,0 +1,347 @@
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook V3.1//EN">
+<article>
+<artheader>
+<title>Xkbd - onscreen soft keyboard for X11</title>
+<author><firstname>Matthew</firstname>
+<surname>Allum</surname></author>
+<copyright>
+      <year>2002</year>
+      <holder>Matthew Allum <email>mallum@handhelds.org</email></holder>
+    </copyright>
+</artheader>
+
+<section><title>Introduction</title>
+<para>
+Xkbd is a small highly configurable 'virtual' on-screen keyboard for X11. It
+is designed primarily for use on a PDA, but will hopefully be of use
+on other devices where a physical keyboard is not present.  
+</para>
+<para>
+Xkbd uses no widget set and is based purely on xlib. It also
+optionally uses the xft library for anti aliased fonts. 
+</para>
+</section>
+<section><title>Building and Installing xkbd</title>
+<para>
+Xkbd uses autoconf, so building it should be straightforward:
+<screen>
+	<prompt>$</prompt><userinput>./configure</userinput>
+	<prompt>$</prompt><userinput>make</userinput>
+	# This next step might require root access
+	<prompt>$</prompt><userinput>make install</userinput>
+</screen>
+See the INSTALL file for (standard) gory details regarding autoconf.
+</para>
+<para>
+Configure currently supports the following options;
+<ItemizedList>
+<ListItem>
+  <userinput>--enable-debug</userinput>  <para>  configure for a debug build </param>
+</ListItem>
+<ListItem>
+  <userinput>--enable-xft</userinput>    <para>configure to use XFT library for anti-aliased fonts.</para>
+</ListItem>
+</ItemizedList>
+</para>
+<para>
+Make also has an 'ipkg' target for building shiny ipkgs. 
+</para>
+<para>
+A prebuilt ipkg is included in the familiar linux distributions
+unstable feed. 
+</para>
+</section>
+<section><title>Using Xkbd</title>
+<para>
+On launch xkbd will attempt to open its configuration file from
+/etc/xkbdrc . 
+</para>
+xkbd understands the following command switches;
+<ItemizedList>
+  <ListItem><formalpara> -display &lt;display&gt;</formalpara>
+      Selects the display for xkbd to appear on.
+  </ListItem>
+  <ListItem><formalpara> -geometry &lt;geometry&gt;</formalpara>
+
+      Provide xkbd with a position and dimension parameters. 
+      For example 320x100+50+50 will make a 320x100 pixel keyboard 50
+      pixels from the side and top of your display. 
+      
+      NOTE: Its useful to use this option in overide redirect mode 
+      ( see below ) as xkbd by default will alway take up the smallest
+      space possible for its current configuration, unless told
+      differently by this option or the window manager. 
+  </ListItem>
+  <ListItem><formalpara> -fa &lt;font name&gt;[-&lt;point size&gt; ]</formalpara>  
+
+      Select the xft AA font for xkbd. Overrides whatever was defined
+      in xkbdrc.
+     </ListItem>
+  <ListItem><formalpara> -fn &lt;font name&gt;</formalpara>
+
+      Select the X11 font for xkbd. Like -fa also overrides. 
+  </ListItem>
+  <ListItem><formalpara> -k  &lt;config file&gt;</formalpara>
+
+      Select an alternate  keyboard definition file other than the
+      default /etc/xkbdrc.
+  </ListItem>
+  <ListItem><formalpara> -v  </formalpara>
+      
+      Display the version.
+  </ListItem>
+  <ListItem><formalpara> -h  </formalpara>
+      
+      Display a breif help message.
+  </ListItem>
+</para>
+</section>
+<section><title>Configuring Xkbd</title>
+<para>
+The actual 'keyboard' xkbd uses is defined in a configuration
+file. The defualt config file is /etc/xkbdrc, an alternate can be
+specified with the -k switch on startup.      
+</para>
+<para>
+A configuration file for xkbd is split into 'tagged' sections; 
+A global section mainly for the keyboards overall appearance ,  And
+row sections containing key definitions which defined the actual
+keys. 
+See /etc/xkbdrc for an example.   
+</para>
+<para>
+The <global> section should appear first in the file and can contain
+the following key/value pairs ( seperated by a space ) ;
+</para>
+<para>
+<table frame="all">
+<title>xkbd config file options</title>
+<tgroup cols=3 align="char" charoff="50" char=".">
+<thead>
+<row>
+<entry>Key</entry>
+<entry>Value</entry>
+<entry>Description</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry>render</entry> 
+<entry>xft|normal</entry>
+<entry>Set mode to 'xft' if you want to use anti aliased fonts.</entry>
+</row>
+<row>
+<entry>font </entry>
+<entry>font definition</entry>
+<entry>
+      Defines the font used for the keyboard. For an xft font, specify
+      the point size like <font name>-<size>. Default font is fixed / mono.
+</entry>
+</row>
+<row>
+<entry>col</entry>
+<entry>color def</entry>
+<entry>
+      Defines the color of keyboard background. Defaults to white.
+      This as with all color definitions can be either an RGB colon
+      seperated list of an X color name. Defaults to white.
+</entry>
+</row>
+<row>
+<entry>down_col</entry>  
+<entry>color</entry>
+<entry>
+      Defines the color of a held down active key. Defaults to black.
+</entry>
+</row>
+<row>
+<entry>
+    txt_col  </entry>
+<entry>color</entry>
+<entry>
+      Defines the color of the keyboard key text. Defaults to black.
+</entry>
+</row>
+<row>
+<entry>
+    border_col </entry>
+<entry>color</entry>
+<entry>
+
+      Defines the color of the keys border. Defaults to black.
+</entry>
+</row>
+<row>
+<entry>
+    width|height</entry>
+<entry>pixel count</entry>
+<entry>
+      Defines the keyboards width or height in pixels. Is overridden by
+      the -geometry switch. Defaults to the smallest possible size for
+      the defined keyboard.
+</entry>  
+</row>
+<row>
+<entry>
+    button_style </entry>
+<entry>rounded|plain|square</entry>
+<entry>
+      Sets the basic button visual 'style. Can be rounded ( default ),
+      square or plain.  
+</entry>
+</para>
+<para>
+
+After the &lt;global>&lt;/global&gt; definition, there then follows one of more
+&lt;row&gt; sections which contain the definitions for each on that row. The
+Rows go from top to and bottom and the keys left to right. Each row
+should just contain <key> definitions, there are no key / value definitions
+presently for rows.  
+</para>
+<para>
+Each key has 3 'states', a default state, a shifted state and a modded
+state. Each state contains different key text and keysyms ( what is
+actually sent to the focused window when a key is pressed )
+</para>
+<para>
+Each &lt;key&gt; section can contain the following key / value pairs. 
+
+   default <text>
+  
+     Defines the text which is displayed on a key when shift or a
+     modifier ( ie alt ) is not pressed. 
+
+   default_ks <XKeysym>
+
+     Defines the actual keysym value that is sent by xkbd to the
+     active window when the key is pressed. The keysym is the actual
+     value thats sent to to active window. Keysyms are listed in 
+     /usr/X11R6/include/X11/keysymdef.h 
+     The is a special keysym '!Mod' which specifies the button is a
+     'special' modifier button to access a 2nd alternate keysym for
+     the key - see the mod section below.  
+
+   shift   <text>
+
+     Defines the text which is diplayed on a key when a shift or CAPS
+     key is held down. If not set the key will show the default text
+     when shift is pressed. 
+
+   shift_ks   <XKeysym>
+
+     Defines the keysym sent when shift or caps is held down.  
+
+   mod     <text>
+
+     Defines a second alternative text string to be displayed. The mod option
+     exists to make it easy to define smaller keyboards with more
+     options per key.
+
+   mod_ks     <XKeysym>
+
+     The keysym to be sent when the 'mod' button is pressed. 
+
+   img        <full path to image>
+
+     Defines an xpm to be displayed on a key. With this set, no text
+     will be displayed and the img currently is the same across of
+     keyboard states. 
+
+   bg  <color>
+
+     Defines the background color of a key, overiding what was set in
+     <global>. 
+
+   fg  <color>
+
+     Defines the foreground color ( ie text ) of a key, overiding what
+     was set in <global> .
+
+   slide_up_ks <XKeysym>
+
+     Defines the keysym to be sent when a key is pressed, but the
+     pointer is slid up before being released ( a 'slide' ). Other
+     slide directions can also be defined ( see below ). defaults
+     to the shifted keysym 
+
+   slide_down_ks <XKeysym>
+
+     defaults to sending a CTRL with the keysym
+
+   slide_left_ks <XKeysym>
+
+     defaults to None.
+
+   slide_right_ks <XKeysym>
+
+     defaults to None.
+
+   width  <number>
+
+     Forces the minimum width of a key to be this set value in pixels.
+     Useful specifying a more exact layout. 
+
+   height <number>
+
+     Forces the minimum height of a key to be this set value in
+     pixels.
+
+   NOTE: If a key contains no keysym definitions its assumed to be an 
+         empty spacer. 
+</para>
+</section>
+<section><title>FAQ</title>
+<para>
+
+<section><title>Xkbd runs ok, but dont send key presses !</title>
+ <para>
+There could be one of two things causing this; 
+</para>
+
+<userinput>xmodmap </userinput>
+ </para>
+</section>
+<section><title>How do I get xkbd to launch from the dock </title>
+ <para>
+ monolaunch provides this. Run monolaunch like this;
+</para>
+<userinput>monolaunch /usr/share/xkbd/img/kbd.xpm xkbd</userinput>
+<para> Adding the '-k' switch to monolaunch will cause xkbd to completely disappear rather than minimise to a bar. 
+ </para>
+</section>
+</para>
+</section>
+<section><title>Embedding Xkbd in to other apps</title>
+<para>
+
+</para> 
+</section>
+<section><title>License</title>
+<para>
+Xkbd is free software released under the terms of the GNU General
+Public License, (GPL). You can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2, or (at your option)
+   any later version.
+</para>
+<para>
+   Xkbd is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+</para>
+</section>
+<section><title>Credits</title>
+<para>Xkbd is written by Matthew Allum. It uses the libvirtkeys lib by.
+</para>
+<para>
+Be sure to check out other exciting software by me including; xkbd - a
+xlib virtual on-screen keyboard, pikpak - a python gtk front end to
+ipkg, gtksolo - a gtk module which turns held down left clicks into
+right clicks on gtk apps and jabberpy - a Python library for the Jabber
+instant messaging protocol. 
+</para>
+Xkbd is copyright Matthew Allum 2002.
+</para>
+</section>
+</article>

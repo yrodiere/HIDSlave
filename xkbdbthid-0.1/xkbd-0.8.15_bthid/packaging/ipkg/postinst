@@ -1,0 +1,10 @@
+#!/bin/sh
+if [ -x /usr/bin/update-menus ]
+then
+/usr/bin/update-menus
+fi
+if [ -n "$DISPLAY" ]; then
+xmodmap -e "keycode 135 = Mode_switch Multi_key"
+fi
+[ -n "$(pidof mbdock)" ] && kill -HUP `pidof mbdock`
+exit 0

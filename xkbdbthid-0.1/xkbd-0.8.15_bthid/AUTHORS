@@ -1,0 +1,10 @@
+xkbd was written by Matthew Allum <breakfast@10.am> 
+
+Carl Worth <cworth@east.isi.edu> also helped with 
+Xtest / XLib trickiness.
+
+<morten@bogeskov.dk> supplied a number of cool patches.
+
+xkbd-bthid was written by Collin R. Mulliner <collin@betaversion.net>
+
+...this means the modifications made to xkbd where done by me!

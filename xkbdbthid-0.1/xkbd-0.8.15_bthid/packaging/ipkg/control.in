@@ -1,0 +1,10 @@
+Package: @PACKAGE@
+Section: x11
+Priority: optional
+Version: @VERSION@-3
+Architecture: arm
+Source: http://handhelds.org/~mallum/xkbd
+Maintainer: mallum <mallum@handhelds.org> 
+Depends: xlibs, xbase-clients, libxft2
+Description: A small, highly configurable virtual on-screen keyboard for X11 based on xlib.  
+.

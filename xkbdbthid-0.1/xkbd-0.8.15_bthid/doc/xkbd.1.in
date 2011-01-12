@@ -1,0 +1,30 @@
+.TH "xkbd" 1
+.SH NAME
+xkbd \- An onscreen virtual keyboard for X11 
+.SH SYNOPSIS
+.B xkbd
+-help
+.br
+.B xkbd
+[options...]
+.SH DESCRIPTION
+Xkbd is a lightweight software keyboard for X11
+.SH OPTIONS
+.TP
+.B \-display
+Specify the XServer for xkbd to connect to. Defaults to
+$DISPLAY environmental variable. 
+.TP
+.B \-k <keybaord file> 
+Select the keyboard definition file overiding what is specified in ~/.xkbd or the defuault $PREFIX/share/xkbd/qwerty.xkbd .
+.TP
+.B \-font <font name>
+Select the font for xkbd to use.
+.TP
+.B \-xid <font name>
+Makes Xkbd not map its window and print its window ID to stdout. Useful for embedding in other toolkits such as GTK. 
+.SH "SEE ALSO"
+X(7)
+.SH BUGS
+If you find some, report to mallum@handhelds.org
+

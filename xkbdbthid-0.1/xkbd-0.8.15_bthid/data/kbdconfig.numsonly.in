@@ -1,0 +1,74 @@
+<global>
+#
+# This is a simple keyboard for gpe-login
+# and lazy people ;-)
+#
+
+font   verdana-7:bold|mono-8|fixed
+down_col  200:200:200
+
+</global>
+<layout>
+ <row>
+ 	<key>
+ 		default     1
+ 		default_ks  1
+ 	</key>
+ 	<key>
+ 		default     2
+ 		default_ks  2
+ 	</key>
+ 	<key>
+ 		default	    3
+ 		default_ks  3
+ 	</key>
+
+ </row>
+ <row>
+ 	<key>
+ 		default     4
+ 		default_ks  4
+ 	</key>
+ 	<key>
+ 		default  5
+ 		default_ks  5
+ 		</key>
+ 	<key>
+ 		default  6
+ 		default_ks  6
+ 	</key>
+ </row>
+ <row>
+ 	<key>
+ 		default  7
+ 		default_ks  7
+ 	</key>
+ 	<key>
+ 		default  8
+ 		default_ks  8
+ 	</key>
+ 	<key>
+ 		default  9
+ 		default_ks  9
+ 	</key>
+ </row>
+ <row>
+	<key>
+		img  @pkgdatadir@/img/backspace.xpm
+		default_ks  BackSpace
+		key_span_width 1
+	</key>
+
+ 	<key>
+ 		default  0
+ 		default_ks  0
+		key_span_width 1
+ 	</key>
+	<key>
+		default  RET
+		default_ks Return
+		key_span_width 1
+        </key>		
+
+ </row>
+ </layout>

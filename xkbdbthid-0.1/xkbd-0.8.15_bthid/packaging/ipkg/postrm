@@ -1,0 +1,5 @@
+#!/bin/sh
+if [ -x /usr/bin/update-menus ]
+then
+/usr/bin/update-menus
+fi
