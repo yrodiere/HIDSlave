@@ -57,7 +57,11 @@ static void add_lang_attr(sdp_record_t *r)
 
 /*
  *  100% taken from bluez-utils (sdptool)
- */
+ 
+ *  /!\ Ne semble plus utilisé.
+ *  Cette fonction était appelé par sdp_set_add_access_protos qui est maintenant définie autrepart.
+ 
+ *
 static sdp_data_t *access_proto_to_dataseq(sdp_record_t *rec, sdp_list_t *proto)
 {
 	sdp_data_t *seq = NULL;
@@ -110,7 +114,7 @@ static sdp_data_t *access_proto_to_dataseq(sdp_record_t *rec, sdp_list_t *proto)
 	free(seqDTDs);
 	free(seqs);
 	return seq;
-}
+}*/
 
 /*
  *  add additional access protos
@@ -218,6 +222,7 @@ void sdp_add_keyboard()
 	}
 	session = sdp_session;
 
+    // TODO que fait sdp_record_alloc ?
 	sdp_record = sdp_record_alloc();
 	if (!sdp_record) {
 		perror("add_keyboard sdp_record_alloc: ");
@@ -226,24 +231,34 @@ void sdp_add_keyboard()
 
 	memset((void*)sdp_record, 0, sizeof(sdp_record_t));
 	sdp_record->handle = 0xffffffff;
+	// TODO que fait sdp_uuid16_create ?
 	sdp_uuid16_create(&root_uuid, PUBLIC_BROWSE_GROUP);
+    // TODO que fait sdp_list_append	
 	root = sdp_list_append(0, &root_uuid);
+    // TODO que fait sdp_set_brows_groups ?	
 	sdp_set_browse_groups(sdp_record, root);
 
+    // TODO que fait add_lang_attr ? Voir plus haut
+    /*
+        Cette fonction semble ajouter un parametre de langue au sdp record.
+    */
 	add_lang_attr(sdp_record);
 	
 	sdp_uuid16_create(&hidkb_uuid, HID_SVCLASS_ID);
 	svclass_id = sdp_list_append(0, &hidkb_uuid);
+	// TODO que fait sdp_set_service_classes
 	sdp_set_service_classes(sdp_record, svclass_id);
 
 	sdp_uuid16_create(&profile[0].uuid, HID_PROFILE_ID);
 	profile[0].version = 0x0100;
 	pfseq = sdp_list_append(0, profile);
+	// TODO que fait sdp_set_profile_descs ?
 	sdp_set_profile_descs(sdp_record, pfseq);
 
 	// PROTO
 	sdp_uuid16_create(&l2cap_uuid, L2CAP_UUID);
 	proto[1] = sdp_list_append(0, &l2cap_uuid);
+	// TODO que fait sdp_data_alloc ?
 	channel = sdp_data_alloc(SDP_UINT8, &ctrl);
 	proto[1] = sdp_list_append(proto[1], channel);
 	apseq = sdp_list_append(0, proto[1]);
@@ -317,20 +332,27 @@ void sdp_open()
 {
 	if (!sdp_session) {
 		sdp_session = sdp_connect(BDADDR_ANY, BDADDR_LOCAL, 0);
+		printf("        new sdp session\n");
 	}
 	if (!sdp_session) {
 		printf("%s: sdp_session invalid\n", (char*)__func__);
 		exit(-1);
 	}
+	printf("sdp session : %d", sdp_session);
 }
 
-#ifdef SDP_MAIN
 int main()
-{
+{    
+    printf("// SDP test //////\n");
+	printf("    - open\n");
 	sdp_open();
+    printf("      ok\n");
+	printf("    - add keyboard\n");
 	sdp_add_keyboard();
-	sleep(60);	
+	printf("      ok\n");
+	printf("      Press enter to remove keyboard\n");
+	getchar();
 	sdp_remove();
+	printf("removed\n");
 	return(1);
 }
-#endif

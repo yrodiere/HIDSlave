@@ -510,9 +510,9 @@ s,@AWK@,mawk,;t t
 s,@SET_MAKE@,,;t t
 s,@am__leading_dot@,.,;t t
 s,@PKG_CONFIG@,/usr/bin/pkg-config,;t t
-s,@XFT_CONFIG@,no,;t t
+s,@XFT_CONFIG@,,;t t
 s,@CC@,gcc,;t t
-s,@CFLAGS@, -DUSE_XFT -DUSE_XPM,;t t
+s,@CFLAGS@, -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM,;t t
 s,@LDFLAGS@,,;t t
 s,@CPPFLAGS@,,;t t
 s,@ac_ct_CC@,gcc,;t t
@@ -559,7 +559,7 @@ s,@X_PRE_LIBS@,,;t t
 s,@X_LIBS@,,;t t
 s,@X_EXTRA_LIBS@,,;t t
 s,@LIBOBJS@,,;t t
-s,@XFT_LIBS@, -lXft,;t t
+s,@XFT_LIBS@,-lXft  ,;t t
 s,@XPM_LIBS@, -lXpm,;t t
 s,@LTLIBOBJS@,,;t t
 CEOF

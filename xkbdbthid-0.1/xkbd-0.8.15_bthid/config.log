@@ -56,10 +56,6 @@ configure:1766: result: yes
 configure:1947: checking for pkg-config
 configure:1965: found /usr/bin/pkg-config
 configure:1978: result: /usr/bin/pkg-config
-configure:1989: WARNING: *** Could not find pkg-config entry for xft in your path, build may fail***
-configure:1993: checking for xft-config
-configure:2024: result: no
-configure:2032: WARNING: ***Could not find xft-config, build may fail. You may want --disable-xft ***
 configure:2112: checking for gcc
 configure:2128: found /usr/bin/gcc
 configure:2138: result: gcc
@@ -82,7 +78,7 @@ configure:2395: gcc -V </dev/null >&5
 gcc: '-V' option must have argument
 configure:2398: $? = 1
 configure:2421: checking for C compiler default output file name
-configure:2424: gcc  -DUSE_XFT -DUSE_XPM   conftest.c  >&5
+configure:2424: gcc  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM   conftest.c  >&5
 configure:2427: $? = 0
 configure:2473: result: a.out
 configure:2478: checking whether the C compiler works
@@ -92,15 +88,15 @@ configure:2504: result: yes
 configure:2511: checking whether we are cross compiling
 configure:2513: result: no
 configure:2516: checking for suffix of executables
-configure:2518: gcc -o conftest  -DUSE_XFT -DUSE_XPM   conftest.c  >&5
+configure:2518: gcc -o conftest  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM   conftest.c  >&5
 configure:2521: $? = 0
 configure:2546: result: 
 configure:2552: checking for suffix of object files
-configure:2573: gcc -c  -DUSE_XFT -DUSE_XPM  conftest.c >&5
+configure:2573: gcc -c  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM  conftest.c >&5
 configure:2576: $? = 0
 configure:2598: result: o
 configure:2602: checking whether we are using the GNU C compiler
-configure:2626: gcc -c  -DUSE_XFT -DUSE_XPM  conftest.c >&5
+configure:2626: gcc -c  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM  conftest.c >&5
 configure:2632: $? = 0
 configure:2635: test -z 			 || test ! -s conftest.err
 configure:2638: $? = 0
@@ -116,14 +112,14 @@ configure:2699: test -s conftest.o
 configure:2702: $? = 0
 configure:2713: result: yes
 configure:2730: checking for gcc option to accept ANSI C
-configure:2800: gcc  -c  -DUSE_XFT -DUSE_XPM  conftest.c >&5
+configure:2800: gcc  -c  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM  conftest.c >&5
 configure:2806: $? = 0
 configure:2809: test -z 			 || test ! -s conftest.err
 configure:2812: $? = 0
 configure:2815: test -s conftest.o
 configure:2818: $? = 0
 configure:2836: result: none needed
-configure:2854: gcc -c  -DUSE_XFT -DUSE_XPM  conftest.c >&5
+configure:2854: gcc -c  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM  conftest.c >&5
 conftest.c:2: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'me'
 configure:2860: $? = 1
 configure: failed program was:
@@ -195,13 +191,13 @@ configure: failed program was:
 | /* end confdefs.h.  */
 | #include <ac_nonexistent.h>
 configure:4238: checking for ANSI C header files
-configure:4263: gcc -c  -DUSE_XFT -DUSE_XPM  conftest.c >&5
+configure:4263: gcc -c  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM  conftest.c >&5
 configure:4269: $? = 0
 configure:4272: test -z 			 || test ! -s conftest.err
 configure:4275: $? = 0
 configure:4278: test -s conftest.o
 configure:4281: $? = 0
-configure:4370: gcc -o conftest  -DUSE_XFT -DUSE_XPM   conftest.c  >&5
+configure:4370: gcc -o conftest  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM   conftest.c  >&5
 conftest.c: In function 'main':
 conftest.c:28: warning: incompatible implicit declaration of built-in function 'exit'
 configure:4373: $? = 0
@@ -209,7 +205,7 @@ configure:4375: ./conftest
 configure:4378: $? = 0
 configure:4393: result: yes
 configure:4417: checking for sys/types.h
-configure:4433: gcc -c  -DUSE_XFT -DUSE_XPM  conftest.c >&5
+configure:4433: gcc -c  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM  conftest.c >&5
 configure:4439: $? = 0
 configure:4442: test -z 			 || test ! -s conftest.err
 configure:4445: $? = 0
@@ -217,7 +213,7 @@ configure:4448: test -s conftest.o
 configure:4451: $? = 0
 configure:4462: result: yes
 configure:4417: checking for sys/stat.h
-configure:4433: gcc -c  -DUSE_XFT -DUSE_XPM  conftest.c >&5
+configure:4433: gcc -c  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM  conftest.c >&5
 configure:4439: $? = 0
 configure:4442: test -z 			 || test ! -s conftest.err
 configure:4445: $? = 0
@@ -225,7 +221,7 @@ configure:4448: test -s conftest.o
 configure:4451: $? = 0
 configure:4462: result: yes
 configure:4417: checking for stdlib.h
-configure:4433: gcc -c  -DUSE_XFT -DUSE_XPM  conftest.c >&5
+configure:4433: gcc -c  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM  conftest.c >&5
 configure:4439: $? = 0
 configure:4442: test -z 			 || test ! -s conftest.err
 configure:4445: $? = 0
@@ -233,7 +229,7 @@ configure:4448: test -s conftest.o
 configure:4451: $? = 0
 configure:4462: result: yes
 configure:4417: checking for string.h
-configure:4433: gcc -c  -DUSE_XFT -DUSE_XPM  conftest.c >&5
+configure:4433: gcc -c  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM  conftest.c >&5
 configure:4439: $? = 0
 configure:4442: test -z 			 || test ! -s conftest.err
 configure:4445: $? = 0
@@ -241,7 +237,7 @@ configure:4448: test -s conftest.o
 configure:4451: $? = 0
 configure:4462: result: yes
 configure:4417: checking for memory.h
-configure:4433: gcc -c  -DUSE_XFT -DUSE_XPM  conftest.c >&5
+configure:4433: gcc -c  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM  conftest.c >&5
 configure:4439: $? = 0
 configure:4442: test -z 			 || test ! -s conftest.err
 configure:4445: $? = 0
@@ -249,7 +245,7 @@ configure:4448: test -s conftest.o
 configure:4451: $? = 0
 configure:4462: result: yes
 configure:4417: checking for strings.h
-configure:4433: gcc -c  -DUSE_XFT -DUSE_XPM  conftest.c >&5
+configure:4433: gcc -c  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM  conftest.c >&5
 configure:4439: $? = 0
 configure:4442: test -z 			 || test ! -s conftest.err
 configure:4445: $? = 0
@@ -257,7 +253,7 @@ configure:4448: test -s conftest.o
 configure:4451: $? = 0
 configure:4462: result: yes
 configure:4417: checking for inttypes.h
-configure:4433: gcc -c  -DUSE_XFT -DUSE_XPM  conftest.c >&5
+configure:4433: gcc -c  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM  conftest.c >&5
 configure:4439: $? = 0
 configure:4442: test -z 			 || test ! -s conftest.err
 configure:4445: $? = 0
@@ -265,7 +261,7 @@ configure:4448: test -s conftest.o
 configure:4451: $? = 0
 configure:4462: result: yes
 configure:4417: checking for stdint.h
-configure:4433: gcc -c  -DUSE_XFT -DUSE_XPM  conftest.c >&5
+configure:4433: gcc -c  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM  conftest.c >&5
 configure:4439: $? = 0
 configure:4442: test -z 			 || test ! -s conftest.err
 configure:4445: $? = 0
@@ -273,7 +269,7 @@ configure:4448: test -s conftest.o
 configure:4451: $? = 0
 configure:4462: result: yes
 configure:4417: checking for unistd.h
-configure:4433: gcc -c  -DUSE_XFT -DUSE_XPM  conftest.c >&5
+configure:4433: gcc -c  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM  conftest.c >&5
 configure:4439: $? = 0
 configure:4442: test -z 			 || test ! -s conftest.err
 configure:4445: $? = 0
@@ -281,7 +277,7 @@ configure:4448: test -s conftest.o
 configure:4451: $? = 0
 configure:4462: result: yes
 configure:4488: checking dlfcn.h usability
-configure:4500: gcc -c  -DUSE_XFT -DUSE_XPM  conftest.c >&5
+configure:4500: gcc -c  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM  conftest.c >&5
 configure:4506: $? = 0
 configure:4509: test -z 			 || test ! -s conftest.err
 configure:4512: $? = 0
@@ -596,11 +592,11 @@ configure:5523: result: no
 configure:5553: checking the maximum length of command line arguments
 configure:5618: result: 32768
 configure:5629: checking command to parse /usr/bin/nm -B output from gcc object
-configure:5718: gcc -c  -DUSE_XFT -DUSE_XPM  conftest.c >&5
+configure:5718: gcc -c  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM  conftest.c >&5
 configure:5721: $? = 0
 configure:5725: /usr/bin/nm -B conftest.o \| sed -n -e 's/^.*[ 	]\([ABCDGIRSTW][ABCDGIRSTW]*\)[ 	][ 	]*\(\)\([_A-Za-z][_A-Za-z0-9]*\)$/\1 \2\3 \3/p' \> conftest.nm
 configure:5728: $? = 0
-configure:5780: gcc -o conftest  -DUSE_XFT -DUSE_XPM   conftest.c conftstm.o >&5
+configure:5780: gcc -o conftest  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM   conftest.c conftstm.o >&5
 configure:5783: $? = 0
 configure:5821: result: ok
 configure:5825: checking for objdir
@@ -617,24 +613,24 @@ configure:6117: result: strip
 configure:6379: checking if gcc static flag  works
 configure:6402: result: yes
 configure:6420: checking if gcc supports -fno-rtti -fno-exceptions
-configure:6438: gcc -c  -DUSE_XFT -DUSE_XPM  -fno-rtti -fno-exceptions conftest.c >&5
+configure:6438: gcc -c  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM  -fno-rtti -fno-exceptions conftest.c >&5
 cc1: warning: command line option "-fno-rtti" is valid for C++/ObjC++ but not for C
 configure:6442: $? = 0
 configure:6453: result: no
 configure:6468: checking for gcc option to produce PIC
 configure:6645: result: -fPIC
 configure:6653: checking if gcc PIC flag -fPIC works
-configure:6671: gcc -c  -DUSE_XFT -DUSE_XPM  -fPIC -DPIC conftest.c >&5
+configure:6671: gcc -c  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM  -fPIC -DPIC conftest.c >&5
 configure:6675: $? = 0
 configure:6686: result: yes
 configure:6710: checking if gcc supports -c -o file.o
-configure:6731: gcc -c  -DUSE_XFT -DUSE_XPM  -o out/conftest2.o conftest.c >&5
+configure:6731: gcc -c  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM  -o out/conftest2.o conftest.c >&5
 configure:6735: $? = 0
 configure:6755: result: yes
 configure:6781: checking whether the gcc linker (/usr/bin/ld) supports shared libraries
 configure:7628: result: yes
 configure:7654: checking whether -lc should be explicitly linked in
-configure:7659: gcc -c  -DUSE_XFT -DUSE_XPM  conftest.c >&5
+configure:7659: gcc -c  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM  conftest.c >&5
 configure:7662: $? = 0
 configure:7676: gcc -shared conftest.o  -v -Wl,-soname -Wl,conftest -o conftest 2\>\&1 \| grep  -lc  \>/dev/null 2\>\&1
 configure:7679: $? = 0
@@ -681,21 +677,21 @@ configure:12003: result: yes
 configure:19250: checking for X
 configure:19356: gcc -E  conftest.c
 configure:19362: $? = 0
-configure:19412: gcc -o conftest  -DUSE_XFT -DUSE_XPM   conftest.c -lX11  >&5
+configure:19412: gcc -o conftest  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM   conftest.c -lX11  >&5
 configure:19418: $? = 0
 configure:19421: test -z 			 || test ! -s conftest.err
 configure:19424: $? = 0
 configure:19427: test -s conftest
 configure:19430: $? = 0
 configure:19484: result: libraries , headers in standard search path
-configure:19895: gcc -o conftest  -DUSE_XFT -DUSE_XPM   conftest.c   -lX11 >&5
+configure:19895: gcc -o conftest  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM   conftest.c   -lX11 >&5
 configure:19901: $? = 0
 configure:19904: test -z 			 || test ! -s conftest.err
 configure:19907: $? = 0
 configure:19910: test -s conftest
 configure:19913: $? = 0
 configure:20069: checking for gethostbyname
-configure:20126: gcc -o conftest  -DUSE_XFT -DUSE_XPM   conftest.c  >&5
+configure:20126: gcc -o conftest  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM   conftest.c  >&5
 configure:20132: $? = 0
 configure:20135: test -z 			 || test ! -s conftest.err
 configure:20138: $? = 0
@@ -703,7 +699,7 @@ configure:20141: test -s conftest
 configure:20144: $? = 0
 configure:20156: result: yes
 configure:20305: checking for connect
-configure:20362: gcc -o conftest  -DUSE_XFT -DUSE_XPM   conftest.c  >&5
+configure:20362: gcc -o conftest  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM   conftest.c  >&5
 configure:20368: $? = 0
 configure:20371: test -z 			 || test ! -s conftest.err
 configure:20374: $? = 0
@@ -711,7 +707,7 @@ configure:20377: test -s conftest
 configure:20380: $? = 0
 configure:20392: result: yes
 configure:20466: checking for remove
-configure:20523: gcc -o conftest  -DUSE_XFT -DUSE_XPM   conftest.c  >&5
+configure:20523: gcc -o conftest  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM   conftest.c  >&5
 configure:20529: $? = 0
 configure:20532: test -z 			 || test ! -s conftest.err
 configure:20535: $? = 0
@@ -719,7 +715,7 @@ configure:20538: test -s conftest
 configure:20541: $? = 0
 configure:20553: result: yes
 configure:20627: checking for shmat
-configure:20684: gcc -o conftest  -DUSE_XFT -DUSE_XPM   conftest.c  >&5
+configure:20684: gcc -o conftest  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM   conftest.c  >&5
 configure:20690: $? = 0
 configure:20693: test -z 			 || test ! -s conftest.err
 configure:20696: $? = 0
@@ -727,7 +723,7 @@ configure:20699: test -s conftest
 configure:20702: $? = 0
 configure:20714: result: yes
 configure:20797: checking for IceConnectionNumber in -lICE
-configure:20827: gcc -o conftest  -DUSE_XFT -DUSE_XPM   conftest.c -lICE   >&5
+configure:20827: gcc -o conftest  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM   conftest.c -lICE   >&5
 /usr/bin/ld: cannot find -lICE
 collect2: ld returned 1 exit status
 configure:20833: $? = 1
@@ -779,7 +775,7 @@ configure:21046: result: yes
 configure:21041: checking for string.h
 configure:21046: result: yes
 configure:21050: checking sys/param.h usability
-configure:21062: gcc -c  -DUSE_XFT -DUSE_XPM  conftest.c >&5
+configure:21062: gcc -c  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM  conftest.c >&5
 configure:21068: $? = 0
 configure:21071: test -z 			 || test ! -s conftest.err
 configure:21074: $? = 0
@@ -795,7 +791,7 @@ configure:21172: result: yes
 configure:21041: checking for unistd.h
 configure:21046: result: yes
 configure:21187: checking for an ANSI C-conforming const
-configure:21254: gcc -c  -DUSE_XFT -DUSE_XPM  conftest.c >&5
+configure:21254: gcc -c  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM  conftest.c >&5
 configure:21260: $? = 0
 configure:21263: test -z 			 || test ! -s conftest.err
 configure:21266: $? = 0
@@ -805,13 +801,13 @@ configure:21283: result: yes
 configure:21300: checking for stdlib.h
 configure:21305: result: yes
 configure:21444: checking for GNU libc compatible malloc
-configure:21473: gcc -o conftest  -DUSE_XFT -DUSE_XPM   conftest.c  >&5
+configure:21473: gcc -o conftest  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM   conftest.c  >&5
 configure:21476: $? = 0
 configure:21478: ./conftest
 configure:21481: $? = 0
 configure:21495: result: yes
 configure:21525: checking return type of signal handlers
-configure:21556: gcc -c  -DUSE_XFT -DUSE_XPM  conftest.c >&5
+configure:21556: gcc -c  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM  conftest.c >&5
 configure:21562: $? = 0
 configure:21565: test -z 			 || test ! -s conftest.err
 configure:21568: $? = 0
@@ -819,7 +815,7 @@ configure:21571: test -s conftest.o
 configure:21574: $? = 0
 configure:21585: result: void
 configure:21598: checking for strchr
-configure:21655: gcc -o conftest  -DUSE_XFT -DUSE_XPM   conftest.c  >&5
+configure:21655: gcc -o conftest  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM   conftest.c  >&5
 conftest.c:57: warning: conflicting types for built-in function 'strchr'
 configure:21661: $? = 0
 configure:21664: test -z 			 || test ! -s conftest.err
@@ -828,7 +824,7 @@ configure:21670: test -s conftest
 configure:21673: $? = 0
 configure:21685: result: yes
 configure:21598: checking for strdup
-configure:21655: gcc -o conftest  -DUSE_XFT -DUSE_XPM   conftest.c  >&5
+configure:21655: gcc -o conftest  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM   conftest.c  >&5
 conftest.c:58: warning: conflicting types for built-in function 'strdup'
 configure:21661: $? = 0
 configure:21664: test -z 			 || test ! -s conftest.err
@@ -927,7 +923,6 @@ ac_cv_host_alias=i686-pc-linux-gnu
 ac_cv_lib_ICE_IceConnectionNumber=no
 ac_cv_objext=o
 ac_cv_path_PKG_CONFIG=/usr/bin/pkg-config
-ac_cv_path_XFT_CONFIG=no
 ac_cv_path_install='/usr/bin/install -c'
 ac_cv_prog_AWK=mawk
 ac_cv_prog_CPP='gcc -E'
@@ -986,7 +981,7 @@ AUTOMAKE='${SHELL} /home/hellboy/Projets/HIDSlave/xkbdbthid-0.1/xkbd-0.8.15_bthi
 AWK='mawk'
 CC='gcc'
 CCDEPMODE='depmode=gcc3'
-CFLAGS=' -DUSE_XFT -DUSE_XPM'
+CFLAGS=' -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM'
 CPP='gcc -E'
 CPPFLAGS=''
 CXX='g++'
@@ -1029,8 +1024,8 @@ SET_MAKE=''
 SHELL='/bin/bash'
 STRIP='strip'
 VERSION='0.8.15'
-XFT_CONFIG='no'
-XFT_LIBS=' -lXft'
+XFT_CONFIG=''
+XFT_LIBS='-lXft  '
 XPM_LIBS=' -lXpm'
 X_CFLAGS=''
 X_EXTRA_LIBS=''

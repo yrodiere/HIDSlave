@@ -88,8 +88,8 @@ RANLIB = ranlib
 RC = @RC@
 STRIP = strip
 VERSION = 0.8.15
-XFT_CONFIG = no
-XFT_LIBS =  -lXft
+XFT_CONFIG = 
+XFT_LIBS = -lXft  
 XPM_LIBS =  -lXpm
 am__include = include
 am__leading_dot = .
@@ -100,7 +100,7 @@ mkdir_p = mkdir -p -- .
 DEFAULT_CONFIG = $(pkgdatadir)/en_GB.qwerty.xkbd
 
 LDADD =  -lX11 -lXtst $(XPM_LIBS) $(XFT_LIBS) -lbluetooth
-CFLAGS =  -DUSE_XFT -DUSE_XPM -DDEFAULTCONFIG=\"$(DEFAULT_CONFIG)\"
+CFLAGS =  -DUSE_XFT -I/usr/include/freetype2   -DUSE_XPM -DDEFAULTCONFIG=\"$(DEFAULT_CONFIG)\"
 
 bin_PROGRAMS = xkbd
 xkbd_SOURCES = xkbd.c libXkbd.c box.c button.c kb.c libvirtkeys.c                       structs.h box.h  button.h  kb.h  libvirtkeys.h                       libXkbd.h hidcd.c hidcd.h hid.h sdp.h sdp.c
