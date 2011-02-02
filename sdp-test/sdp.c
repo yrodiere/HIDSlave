@@ -283,8 +283,8 @@ void sdp_add_keyboard()
 	aproto = sdp_list_append(0, apseq);
 	sdp_set_add_access_protos(sdp_record, aproto);
 	
-	sdp_set_info_attr(sdp_record, "Collin's Fake Bluetooth Keyboard", 
-		"MUlliNER.ORG", "http://www.mulliner.org/bluetooth/");
+	sdp_set_info_attr(sdp_record, "Yabde", 
+		"gravitezero & fenrhil", "original code writer : http://www.mulliner.org/bluetooth/");
 
 	for (i = 0; i < sizeof(hid_attr)/2; i++) {
 		sdp_attr_add_new(sdp_record, SDP_ATTR_HID_DEVICE_RELEASE_NUMBER+i, SDP_UINT16, &hid_attr[i]);
@@ -332,27 +332,11 @@ void sdp_open()
 {
 	if (!sdp_session) {
 		sdp_session = sdp_connect(BDADDR_ANY, BDADDR_LOCAL, 0);
-		printf("        new sdp session\n");
+		printf("      new sdp session\n");
 	}
 	if (!sdp_session) {
 		printf("%s: sdp_session invalid\n", (char*)__func__);
 		exit(-1);
 	}
-	printf("sdp session : %d", sdp_session);
-}
-
-int main()
-{    
-    printf("// SDP test //////\n");
-	printf("    - open\n");
-	sdp_open();
-    printf("      ok\n");
-	printf("    - add keyboard\n");
-	sdp_add_keyboard();
-	printf("      ok\n");
-	printf("      Press enter to remove keyboard\n");
-	getchar();
-	sdp_remove();
-	printf("removed\n");
-	return(1);
+	printf("      sdp session : %d\n", sdp_session);
 }

@@ -12,9 +12,8 @@
 #ifndef __SDP_H__
 #define __SDP_H__
 
-#endif
-
-void sdp_add_keyboardh();
+void sdp_add_keyboard();
 void sdp_remove();
 void sdp_open();
-void main();
+
+#endif
