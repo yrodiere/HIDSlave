@@ -159,6 +159,7 @@ void sdp_add_keyboard()
 	int leng[2];
 	uint8_t hid_spec_type = 0x22;
 	uint16_t hid_attr_lang[] = {0x409,0x100};
+
 	static const uint8_t ctrl = L2CAP_PSM_HIDP_CTRL;
 	static const uint8_t intr = L2CAP_PSM_HIDP_INTR;
 
@@ -261,7 +262,6 @@ void sdp_add_keyboard()
 	profile[0].version = 0x0100;
 	pfseq = sdp_list_append(0, profile);
 	sdp_set_profile_descs(sdp_record, pfseq);
-
 
 	// PROTO ///////////////////
 	/*
