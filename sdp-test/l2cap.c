@@ -27,7 +27,9 @@
 
 /***********************************************
  *
- * Met en place un socket serveur ??
+ * Met en place un socket serveur
+ * psm ??
+ * lm ??
  */
 int l2cap_listen(const bdaddr_t *bdaddr, unsigned short psm, int lm, int backlog)
 {
@@ -41,7 +43,7 @@ int l2cap_listen(const bdaddr_t *bdaddr, unsigned short psm, int lm, int backlog
 	memset(&addr, 0, sizeof(addr));
 	addr.l2_family = AF_BLUETOOTH;
 	bacpy(&addr.l2_bdaddr, bdaddr);
-	addr.l2_psm = htobs(psm);
+	addr.l2_psm = htobs(psm);  // convert numbers to Bluetooth byte order 
 
 	if (bind(sk, (struct sockaddr *) &addr, sizeof(addr)) < 0) {
 		close(sk);

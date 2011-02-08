@@ -157,7 +157,7 @@ void sdp_add_keyboard()
 	int leng[2];
 	uint8_t hid_spec_type = 0x22;
 	uint16_t hid_attr_lang[] = {0x409,0x100};
-	static const uint8_t ctrl = 0x11;
+	static const unsigned short ctrl = 17; // to match apple mighty mouse value, original value : static const uint8_t ctrl = 0x11;	
 	static const uint8_t intr = 0x13;
 	static const uint16_t hid_attr[] = {0x100,0x111,0x40,0x0d,0x01,0x01};
 	static const uint16_t hid_attr2[] = {0x0,0x01,0x100,0x1f40,0x01,0x01};
@@ -259,7 +259,7 @@ void sdp_add_keyboard()
 	sdp_uuid16_create(&l2cap_uuid, L2CAP_UUID);
 	proto[1] = sdp_list_append(0, &l2cap_uuid);
 	// TODO que fait sdp_data_alloc ?
-	channel = sdp_data_alloc(SDP_UINT8, &ctrl);
+	channel = sdp_data_alloc(SDP_UINT8, &ctrl); // to match apple mighty mouse value, original value : channel = sdp_data_alloc(SDP_UINT8, &ctrl);
 	proto[1] = sdp_list_append(proto[1], channel);
 	apseq = sdp_list_append(0, proto[1]);
 

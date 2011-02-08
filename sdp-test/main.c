@@ -6,16 +6,39 @@
 #include "l2cap.h"
 #include "hid.h"
 
+
+/*
+ * is : interrupt socket
+ * iss : interupt server socket
+ * cs : controler socket
+ * css : controler server socket
+ */
+int is, iss, cs, css;
+
+void sendChar(unsigned char keyCode)
+{
+    unsigned char pkg[12];
+
+    pkg[0] = 0xa1;
+    pkg[1] = 0x01;
+    pkg[2] = 0x00; //modifiers ?
+    pkg[3] = 0x00;
+    pkg[4] = keyCode;
+    pkg[5] = 0x00;
+    pkg[6] = 0x00;
+    pkg[7] = 0x00;
+    pkg[8] = 0x00;
+    pkg[9] = 0x00;
+
+    if (write(is, pkg, 10) <= 0) {
+            perror("write");
+    }
+}
+
 int main()
 {
-
-    /*
-     * is : interrupt socket
-     * iss : interupt server socket
-     * cs : controler socket
-     * css : controler server socket
-     */
-	int is, iss, cs, css;
+    unsigned char keyCode;
+	bdaddr_t dst;
 
 
     printf("// SDP test //////\n");
@@ -36,14 +59,25 @@ int main()
 	printf("----- iss listen -------\n");
 
     cs = l2cap_accept(css, NULL);
+    //cs = l2cap_connect(BDADDR_ANY, &dst, L2CAP_PSM_HIDP_CTRL);
+    //perror("");
     printf("----- cs accept --------\n");
     
     is = l2cap_accept(iss, NULL);
+    //is = l2cap_connect(BDADDR_ANY, &dst, L2CAP_PSM_HIDP_INTR);
+    //perror("");
     printf("----- is accept --------\n");
+    
+
+    
+    
     printf("\n");
-    	
-	printf("      Press enter to stop and remove keyboard\n");
-	getchar();
+	
+	for(;;)
+	{
+	    keyCode = getchar();
+	    sendChar(keyCode);
+	}
 	
 	close(is);
 	close(cs);
