@@ -33,7 +33,9 @@
 #include <bluetooth/sdp.h>
 #include <bluetooth/sdp_lib.h>
 #include <bluetooth/rfcomm.h>
-#include <openobex/obex.h>
+//#include <openobex/obex.h>
+
+#include "hid.h"
 
 sdp_record_t *sdp_record;
 sdp_session_t *sdp_session;
@@ -96,7 +98,7 @@ static sdp_data_t *access_proto_to_dataseq(sdp_record_t *rec, sdp_list_t *proto)
 			case SDP_UINT16:
 				values[pslen] = &d->val.uint16;
 				break;
-			case SDP_SEQ8:
+			case SDP_SEQ8: ///////////////////
 			case SDP_SEQ16:
 			case SDP_SEQ32:
 				values[pslen] = d;
@@ -157,9 +159,18 @@ void sdp_add_keyboard()
 	int leng[2];
 	uint8_t hid_spec_type = 0x22;
 	uint16_t hid_attr_lang[] = {0x409,0x100};
-	static const uint8_t ctrl = 0x11;
-	static const uint8_t intr = 0x13;
+	static const uint8_t ctrl = L2CAP_PSM_HIDP_CTRL;
+	static const uint8_t intr = L2CAP_PSM_HIDP_INTR;
+
 	static const uint16_t hid_attr[] = {0x100,0x111,0x40,0x0d,0x01,0x01};
+        /* SDP_ATTR_HID_DEVICE_RELEASE_NUMBER = 0x100
+         * SDP_ATTR_HID_PARSER_VERSION = 0x111
+         * SDP_ATTR_HID_DEVICE_SUBCLASS = 0x40
+         * SDP_ATTR_HID_COUNTRY_CODE = 0x0d
+         * SDP_ATTR_HID_VIRTUAL_CABLE = 0x01
+         * SDP_ATTR_HID_RECONNECT_INITIATE = 0x01
+         */
+	
 	static const uint16_t hid_attr2[] = {0x0,0x01,0x100,0x1f40,0x01,0x01};
 	// taken from Apple Wireless Keyboard
 	const uint8_t hid_spec[] = { 
@@ -222,7 +233,6 @@ void sdp_add_keyboard()
 	}
 	session = sdp_session;
 
-    // TODO que fait sdp_record_alloc ?
 	sdp_record = sdp_record_alloc();
 	if (!sdp_record) {
 		perror("add_keyboard sdp_record_alloc: ");
@@ -230,64 +240,92 @@ void sdp_add_keyboard()
 	}
 
 	memset((void*)sdp_record, 0, sizeof(sdp_record_t));
+	// handle ?????
 	sdp_record->handle = 0xffffffff;
-	// TODO que fait sdp_uuid16_create ?
+
+	// root uuid -> PUBLIC_BROWSE_GROUP
 	sdp_uuid16_create(&root_uuid, PUBLIC_BROWSE_GROUP);
-    // TODO que fait sdp_list_append	
-	root = sdp_list_append(0, &root_uuid);
-    // TODO que fait sdp_set_brows_groups ?	
+	root = sdp_list_append(0, &root_uuid);	
 	sdp_set_browse_groups(sdp_record, root);
 
-    // TODO que fait add_lang_attr ? Voir plus haut
-    /*
-        Cette fonction semble ajouter un parametre de langue au sdp record.
-    */
+	// lang_attr : voir plus haut.
 	add_lang_attr(sdp_record);
 	
+	// Service class UUID -> HID_SVCLASS_ID
 	sdp_uuid16_create(&hidkb_uuid, HID_SVCLASS_ID);
 	svclass_id = sdp_list_append(0, &hidkb_uuid);
-	// TODO que fait sdp_set_service_classes
 	sdp_set_service_classes(sdp_record, svclass_id);
 
+	// profile
 	sdp_uuid16_create(&profile[0].uuid, HID_PROFILE_ID);
 	profile[0].version = 0x0100;
 	pfseq = sdp_list_append(0, profile);
-	// TODO que fait sdp_set_profile_descs ?
 	sdp_set_profile_descs(sdp_record, pfseq);
 
-	// PROTO
-	sdp_uuid16_create(&l2cap_uuid, L2CAP_UUID);
-	proto[1] = sdp_list_append(0, &l2cap_uuid);
-	// TODO que fait sdp_data_alloc ?
-	channel = sdp_data_alloc(SDP_UINT8, &ctrl);
-	proto[1] = sdp_list_append(proto[1], channel);
-	apseq = sdp_list_append(0, proto[1]);
 
-	sdp_uuid16_create(&hidp_uuid, HIDP_UUID);
-	proto[2] = sdp_list_append(0, &hidp_uuid);
-	apseq = sdp_list_append(apseq, proto[2]);
+	// PROTO ///////////////////
+	/*
+	 * Possible liaison avec L2CAP ?
+	 * Apparement, les listes chainé sont plus que trés présente.
+	 * chaque nouveau paramètre est l'occasion d'en créer une.
+	 */
+	 
+	 //APROTO
+	     //APSEQ
+	        // PROTO[1]
+            // L2CAP uuid
+            sdp_uuid16_create(&l2cap_uuid, L2CAP_UUID);
+            proto[1] = sdp_list_append(0, &l2cap_uuid);
 
-	aproto = sdp_list_append(0, apseq);
-	sdp_set_access_protos(sdp_record, aproto);
+            // L2CAP channel Control
+            channel = sdp_data_alloc(SDP_UINT8, &ctrl);
+            proto[1] = sdp_list_append(proto[1], channel);
+        apseq = sdp_list_append(0, proto[1]);
 
-	// ATTR_ADD_PROTO
-	proto[1] = sdp_list_append(0, &l2cap_uuid);
-	channel = sdp_data_alloc(SDP_UINT8, &intr);
-	proto[1] = sdp_list_append(proto[1], channel);
-	apseq = sdp_list_append(0, proto[1]);
+            // PROTO[2]
+            // HIDP uuid
+            sdp_uuid16_create(&hidp_uuid, HIDP_UUID);
+            proto[2] = sdp_list_append(0, &hidp_uuid);
+        apseq = sdp_list_append(apseq, proto[2]);
 
-	sdp_uuid16_create(&hidp_uuid, HIDP_UUID);
-	proto[2] = sdp_list_append(0, &hidp_uuid);
-	apseq = sdp_list_append(apseq, proto[2]);
+    aproto = sdp_list_append(0, apseq);
+    sdp_set_access_protos(sdp_record, aproto);
+
+	// ATTR_ADD_PROTO  /////////
+	
+	// APROTO
+	    // APSEQ
+	        // PROTO[1]
+	        // L2CAP uuid
+	        proto[1] = sdp_list_append(0, &l2cap_uuid);
+	        
+	        // L2CAP channel Interruption
+	        channel = sdp_data_alloc(SDP_UINT8, &intr);
+	        proto[1] = sdp_list_append(proto[1], channel);
+	    apseq = sdp_list_append(0, proto[1]);
+
+            // PROTO[2]
+	        sdp_uuid16_create(&hidp_uuid, HIDP_UUID);
+	        proto[2] = sdp_list_append(0, &hidp_uuid);
+	    apseq = sdp_list_append(apseq, proto[2]);
 
 	aproto = sdp_list_append(0, apseq);
 	sdp_set_add_access_protos(sdp_record, aproto);
 	
+	
+	// Description
 	sdp_set_info_attr(sdp_record, "Yabde", 
 		"gravitezero & fenrhil", "original code writer : http://www.mulliner.org/bluetooth/");
 
 	for (i = 0; i < sizeof(hid_attr)/2; i++) {
 		sdp_attr_add_new(sdp_record, SDP_ATTR_HID_DEVICE_RELEASE_NUMBER+i, SDP_UINT16, &hid_attr[i]);
+		/* SDP_ATTR_HID_DEVICE_RELEASE_NUMBER = 0x100
+         * SDP_ATTR_HID_PARSER_VERSION = 0x111
+         * SDP_ATTR_HID_DEVICE_SUBCLASS = 0x40
+         * SDP_ATTR_HID_COUNTRY_CODE = 0x0d
+         * SDP_ATTR_HID_VIRTUAL_CABLE = 0x01
+         * SDP_ATTR_HID_RECONNECT_INITIATE = 0x01
+         */
 	}
 
 	dtds[0] = &dtd2;
@@ -304,6 +342,7 @@ void sdp_add_keyboard()
 		dtds2[i] = &dtd;
 		values2[i] = &hid_attr_lang[i];
 	}
+	
 	lang_lst = sdp_seq_alloc(dtds2, values2, sizeof(hid_attr_lang)/2);
 	lang_lst2 = sdp_data_alloc(SDP_SEQ8, lang_lst);	
 	sdp_attr_add(sdp_record, SDP_ATTR_HID_LANG_ID_BASE_LIST, lang_lst2);

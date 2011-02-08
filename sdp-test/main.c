@@ -1,9 +1,10 @@
 #include <stdio.h>
 
 #include <bluetooth/bluetooth.h>
+#include <bluetooth/l2cap.h>
 
 #include "sdp.h"
-#include "l2cap.h"
+//#include "l2cap.h" Apparement plus necessaire
 #include "hid.h"
 
 int main()
