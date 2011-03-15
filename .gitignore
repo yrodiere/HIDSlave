@@ -1,0 +1,6 @@
+.metadata
+*.o
+*.so
+*.d
+*.java
+*.class
