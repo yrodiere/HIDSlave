@@ -8,9 +8,11 @@
 #include <sys/socket.h>
 #include <bluetooth/bluetooth.h>
 #include <bluetooth/l2cap.h>
+#include <errno.h>
 
-int Java_net_hidroid_L2capSocket_test(JNIEnv* env, jobject thiz)
+jstring Java_net_hidroid_L2capSocket_test(JNIEnv* env, jobject thiz)
 {
+	jstring result = NULL;
     struct sockaddr_l2 addr = { 0 };
     int s, status;
     char *message = "hello!";
@@ -26,6 +28,14 @@ int Java_net_hidroid_L2capSocket_test(JNIEnv* env, jobject thiz)
 
     // allocate a socket
     s = socket(AF_BLUETOOTH, SOCK_SEQPACKET, BTPROTO_L2CAP);
+    if (s < 0)
+    {
+        // malloc room for the resulting string
+        char* str = malloc(20);
+        sprintf(str, "%d", errno);
+    	result = (*env)->NewStringUTF(env, str);
+    	free(str);
+    }
 
     // set the connection parameters (who to connect to)
     addr.l2_family = AF_BLUETOOTH;
@@ -44,6 +54,6 @@ int Java_net_hidroid_L2capSocket_test(JNIEnv* env, jobject thiz)
 
     close(s);
 
-    return s;
+    return result;
 }
 
