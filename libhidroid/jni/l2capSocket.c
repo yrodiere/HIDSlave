@@ -12,11 +12,11 @@
 
 jstring Java_net_hidroid_L2capSocket_test(JNIEnv* env, jobject thiz)
 {
-	jstring result = NULL;
+	char result[1000];
     struct sockaddr_l2 addr = { 0 };
     int s, status;
     char *message = "hello!";
-    char dest[18] = "01:23:45:67:89:AB";
+    char dest[18] = "00:02:72:A4:7D:1F";
 
     /*if(argc < 2)
     {
@@ -30,34 +30,38 @@ jstring Java_net_hidroid_L2capSocket_test(JNIEnv* env, jobject thiz)
     s = socket(AF_BLUETOOTH, SOCK_SEQPACKET, BTPROTO_L2CAP);
     if (s < 0)
     {
-        // malloc room for the resulting string
-        char* str = malloc(20);
-        sprintf(str, "%d", errno);
-    	result = (*env)->NewStringUTF(env, str);
-    	free(str);
+        sprintf(result, "Socket error: %d. ", errno);
     }
     else
     {
-    	result = (*env)->NewStringUTF(env, "GOT IT");
+        strcpy(result, "Got socket. ");
+
+        // set the connection parameters (who to connect to)
+        addr.l2_family = AF_BLUETOOTH;
+        addr.l2_psm = htobs(0x1001);
+        str2ba( dest, &addr.l2_bdaddr );
+
+        // connect to server
+        status = connect(s, (struct sockaddr *)&addr, sizeof(addr));
+
+        // send a message
+        if( status == 0 )
+        {
+        	strcat(result,"Connected. ");
+            status = write(s, "hello!", 6);
+            if (status == 0)
+            	strcat(result,"Written. ");
+            else
+            	strcat(result,"Write error. ");
+        }
+        else
+        {
+        	strcat(result,"Connection error. ");
+        }
     }
-
-    // set the connection parameters (who to connect to)
-    addr.l2_family = AF_BLUETOOTH;
-    addr.l2_psm = htobs(0x1001);
-    str2ba( dest, &addr.l2_bdaddr );
-
-    // connect to server
-    status = connect(s, (struct sockaddr *)&addr, sizeof(addr));
-
-    // send a message
-    if( status == 0 ) {
-        status = write(s, "hello!", 6);
-    }
-
-    if( status < 0 ) perror("uh oh");
 
     close(s);
 
-    return result;
+    return (*env)->NewStringUTF(env, result);
 }
 
