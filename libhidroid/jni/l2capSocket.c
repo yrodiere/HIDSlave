@@ -36,6 +36,10 @@ jstring Java_net_hidroid_L2capSocket_test(JNIEnv* env, jobject thiz)
     	result = (*env)->NewStringUTF(env, str);
     	free(str);
     }
+    else
+    {
+    	result = (*env)->NewStringUTF(env, "GOT IT");
+    }
 
     // set the connection parameters (who to connect to)
     addr.l2_family = AF_BLUETOOTH;
