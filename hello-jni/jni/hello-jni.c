@@ -234,8 +234,8 @@ Java_com_example_hellojni_HelloJni_stringFromJNI( JNIEnv* env,
 	    sprintf ( logmsg, "sending keycode %d", keycode);
         LOGV( logmsg );
         
-	    sendChar(keycode); // key up
-	    sendChar(0); // key down
+	    sendChar(keycode); // key down
+	    sendChar(0); // key up
     }
     
 	close(is);
