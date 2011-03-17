@@ -70,7 +70,7 @@ int is = 0,  iss = 0, cs = 0, css = 0;
 char logmsg[256];
 
 
-void sendChar()
+void sendChar( char keycode)
 {
     unsigned char pkg[12];
     int ret;
@@ -79,7 +79,7 @@ void sendChar()
     pkg[1] = 0x01;
     pkg[2] = 0x00; // modifiers ?
     pkg[3] = 0x00;
-    pkg[4] = 0x90; // keycode
+    pkg[4] = keycode;
     pkg[5] = 0x00;
     pkg[6] = 0x00;
     pkg[7] = 0x00;
@@ -189,6 +189,7 @@ Java_com_example_hellojni_HelloJni_stringFromJNI( JNIEnv* env,
 {
 
     bdaddr_t dst;
+    char keycode;
     
     str2ba("00:10:60:A8:57:35", &dst);
 
@@ -224,10 +225,19 @@ Java_com_example_hellojni_HelloJni_stringFromJNI( JNIEnv* env,
             LOGV( logmsg );        
         }
     }    
-    
-    // Here is is not open :(
-	sendChar();
 
+    
+    // from AndroHID : a=4, b=5, c= 6 ... 0=39
+    
+    for( keycode = 4 ; keycode < 39; keycode++ )
+    {
+	    sprintf ( logmsg, "sending keycode %d", keycode);
+        LOGV( logmsg );
+        
+	    sendChar(keycode); // key up
+	    sendChar(0); // key down
+    }
+    
 	close(is);
 	close(cs);
 

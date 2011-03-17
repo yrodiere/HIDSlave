@@ -1,5 +1,5 @@
-/home/hellboy/Projets/android-ndk-r5b/samples/hello-jni/obj/local/armeabi/objs-debug/hello-jni/hello-jni.o: \
- /home/hellboy/Projets/android-ndk-r5b/samples/hello-jni/jni/hello-jni.c \
+/home/hellboy/Projets/HIDSlave/hello-jni/obj/local/armeabi/objs-debug/hello-jni/hello-jni.o: \
+ /home/hellboy/Projets/HIDSlave/hello-jni/jni/hello-jni.c \
  /home/hellboy/Projets/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/string.h \
  /home/hellboy/Projets/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/cdefs.h \
  /home/hellboy/Projets/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/cdefs_elf.h \
@@ -52,12 +52,12 @@
  /home/hellboy/Projets/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/asm/sockios.h \
  /home/hellboy/Projets/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/linux/sockios.h \
  /home/hellboy/Projets/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/linux/uio.h \
- /home/hellboy/Projets/android-ndk-r5b/samples/hello-jni/jni/bluetooth/bluetooth.h \
+ /home/hellboy/Projets/HIDSlave/hello-jni/jni/bluetooth/bluetooth.h \
  /home/hellboy/Projets/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/endian.h \
  /home/hellboy/Projets/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/endian.h \
  /home/hellboy/Projets/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/byteswap.h \
- /home/hellboy/Projets/android-ndk-r5b/samples/hello-jni/jni/bluetooth/l2cap.h \
- /home/hellboy/Projets/android-ndk-r5b/samples/hello-jni/jni/bluetooth/hci.h \
+ /home/hellboy/Projets/HIDSlave/hello-jni/jni/bluetooth/l2cap.h \
+ /home/hellboy/Projets/HIDSlave/hello-jni/jni/bluetooth/hci.h \
  /home/hellboy/Projets/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/ioctl.h \
  /home/hellboy/Projets/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/linux/ioctl.h \
  /home/hellboy/Projets/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/asm/ioctl.h \
@@ -65,7 +65,7 @@
  /home/hellboy/Projets/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/asm/ioctls.h \
  /home/hellboy/Projets/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/asm/termbits.h \
  /home/hellboy/Projets/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/ioctl_compat.h \
- /home/hellboy/Projets/android-ndk-r5b/samples/hello-jni/jni/bluetooth/hci_lib.h
+ /home/hellboy/Projets/HIDSlave/hello-jni/jni/bluetooth/hci_lib.h
 
 /home/hellboy/Projets/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/string.h:
 
@@ -171,7 +171,7 @@
 
 /home/hellboy/Projets/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/linux/uio.h:
 
-/home/hellboy/Projets/android-ndk-r5b/samples/hello-jni/jni/bluetooth/bluetooth.h:
+/home/hellboy/Projets/HIDSlave/hello-jni/jni/bluetooth/bluetooth.h:
 
 /home/hellboy/Projets/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/endian.h:
 
@@ -179,9 +179,9 @@
 
 /home/hellboy/Projets/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/byteswap.h:
 
-/home/hellboy/Projets/android-ndk-r5b/samples/hello-jni/jni/bluetooth/l2cap.h:
+/home/hellboy/Projets/HIDSlave/hello-jni/jni/bluetooth/l2cap.h:
 
-/home/hellboy/Projets/android-ndk-r5b/samples/hello-jni/jni/bluetooth/hci.h:
+/home/hellboy/Projets/HIDSlave/hello-jni/jni/bluetooth/hci.h:
 
 /home/hellboy/Projets/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/ioctl.h:
 
@@ -197,4 +197,4 @@
 
 /home/hellboy/Projets/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/ioctl_compat.h:
 
-/home/hellboy/Projets/android-ndk-r5b/samples/hello-jni/jni/bluetooth/hci_lib.h:
+/home/hellboy/Projets/HIDSlave/hello-jni/jni/bluetooth/hci_lib.h:

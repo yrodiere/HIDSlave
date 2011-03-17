@@ -1,2 +1,2 @@
-set solib-search-path /home/hellboy/Projets/android-ndk-r5b/samples/hello-jni/obj/local/armeabi
-directory /home/hellboy/Projets/android-ndk-r5b/platforms/android-8/arch-arm/usr/include /home/hellboy/Projets/android-ndk-r5b/samples/hello-jni/jni /home/hellboy/Projets/android-ndk-r5b/sources/cxx-stl/system
+set solib-search-path /home/hellboy/Projets/HIDSlave/hello-jni/obj/local/armeabi
+directory /home/hellboy/Projets/android-ndk-r5b/platforms/android-8/arch-arm/usr/include /home/hellboy/Projets/HIDSlave/hello-jni/jni /home/hellboy/Projets/android-ndk-r5b/sources/cxx-stl/system

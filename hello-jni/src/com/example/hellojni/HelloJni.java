@@ -43,7 +43,7 @@ public class HelloJni extends Activity
            p = Runtime.getRuntime().exec("su");   
           
            TextView  tv = new TextView(this);
-           Log.v("HelloJNI","ver. 34");
+           Log.v("HelloJNI","ver. 42");
            Log.v("HelloJNI","//////////////////////////////////////////////////");
            tv.setText( stringFromJNI() );
            Log.v("HelloJNI","//////////////////////////////////////////////////");
