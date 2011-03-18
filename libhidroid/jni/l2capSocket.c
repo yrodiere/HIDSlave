@@ -1,7 +1,3 @@
-/* Code from http://people.csail.mit.edu/albert/bluez-intro/x559.html
- *
- */
-
 #include <jni.h>
 #include <stdio.h>
 #include <string.h>
@@ -9,59 +5,83 @@
 #include <bluetooth/bluetooth.h>
 #include <bluetooth/l2cap.h>
 #include <errno.h>
+#include "throw.h"
 
-jstring Java_net_hidroid_L2capSocket_test(JNIEnv* env, jobject thiz)
+static int getCurrentSocket(JNIEnv* env, jobject thiz)
 {
-	char result[1000];
-    struct sockaddr_l2 addr = { 0 };
-    int s, status;
-    char *message = "hello!";
-    char dest[18] = "00:02:72:A4:7D:1F";
+	jfieldID fid = (*env)->GetFieldID(env, (*env)->GetObjectClass(env, thiz),
+			"nativeSocket", "Lnet/hidroid/l2cap/NativeSocket;");
+	jobject socket = (*env)->GetObjectField(env, thiz, fid);
+	jclass clazz = (*env)->GetObjectClass(env, socket);
+	jmethodID mid = (*env)->GetMethodID(env, clazz, "get", "()I");
 
-    /*if(argc < 2)
-    {
-        fprintf(stderr, "usage: %s <bt_addr>\n", argv[0]);
-        exit(2);
-    }
-
-    strncpy(dest, argv[1], 18);*/
-
-    // allocate a socket
-    s = socket(AF_BLUETOOTH, SOCK_SEQPACKET, BTPROTO_L2CAP);
-    if (s < 0)
-    {
-        sprintf(result, "Socket error: %d. ", errno);
-    }
-    else
-    {
-        strcpy(result, "Got socket. ");
-
-        // set the connection parameters (who to connect to)
-        addr.l2_family = AF_BLUETOOTH;
-        addr.l2_psm = htobs(0x1001);
-        str2ba( dest, &addr.l2_bdaddr );
-
-        // connect to server
-        status = connect(s, (struct sockaddr *)&addr, sizeof(addr));
-
-        // send a message
-        if( status == 0 )
-        {
-        	strcat(result,"Connected. ");
-            status = write(s, "hello!", 6);
-            if (status == 0)
-            	strcat(result,"Written. ");
-            else
-            	strcat(result,"Write error. ");
-        }
-        else
-        {
-        	strcat(result,"Connection error. ");
-        }
-    }
-
-    close(s);
-
-    return (*env)->NewStringUTF(env, result);
+	return (*env)->CallIntMethod(env, socket, mid);
 }
 
+static void setCurrentSocket(JNIEnv* env, jobject thiz, int newValue)
+{
+	jfieldID fid = (*env)->GetFieldID(env, (*env)->GetObjectClass(env, thiz),
+			"nativeSocket", "Lnet/hidroid/l2cap/NativeSocket;");
+	jobject socket = (*env)->GetObjectField(env, thiz, fid);
+	jclass clazz = (*env)->GetObjectClass(env, socket);
+	jmethodID mid = (*env)->GetMethodID(env, clazz, "set", "(I)V");
+
+	(*env)->CallVoidMethod(env, socket, mid, newValue);
+}
+
+void Java_net_hidroid_l2cap_L2capSocket_getNativeSocket(JNIEnv* env,
+		jobject thiz)
+{
+	int s;
+	//s = socket(AF_BLUETOOTH, SOCK_SEQPACKET, BTPROTO_L2CAP);
+	s = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_L2CAP);
+
+	setCurrentSocket(env, thiz, s);
+	if (s < 0)
+	{
+		Throw(env, "java/io/IOException", "Could not get any socket: %s",
+				strerror(errno));
+	}
+}
+
+void Java_net_hidroid_l2cap_L2capSocket_nativeConnect(JNIEnv* env,
+		jobject thiz, jstring address, int timeout)
+{
+	struct sockaddr_l2 addr =
+	{ 0 };
+	int s, status;
+	const char *addressCString;
+
+	// Set up parameters
+	addr.l2_family = AF_BLUETOOTH;
+	addr.l2_psm = htobs(0x1001);
+	addressCString = (*env)->GetStringUTFChars(env, address, NULL);
+	str2ba(addressCString, &addr.l2_bdaddr);
+	(*env)->ReleaseStringUTFChars(env, address, addressCString);
+
+	// Connect
+	s = getCurrentSocket(env, thiz);
+	status = connect(s, (struct sockaddr *) &addr, sizeof(addr));
+	if (status < 0)
+	{
+		Throw(env, "java/io/IOException", "Could not connect on socket %d: %s",
+				s, strerror(errno));
+	}
+}
+
+void Java_net_hidroid_l2cap_L2capSocket_nativeClose(JNIEnv* env, jobject thiz)
+{
+	int s, status;
+	s = getCurrentSocket(env, thiz);
+	status = close(s);
+
+	if (status < 0)
+	{
+		Throw(env, "java/io/IOException", "Could not close socket %d: %s", s,
+				strerror(errno));
+	}
+	else
+	{
+		setCurrentSocket(env, thiz, -1);
+	}
+}
