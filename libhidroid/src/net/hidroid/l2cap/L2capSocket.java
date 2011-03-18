@@ -12,15 +12,11 @@ import android.bluetooth.BluetoothDevice;
 
 /**
  * @author fenrhil
- * @todo Allow to choose between datagrams, streams, etc.
  */
 public abstract class L2capSocket implements Closeable {
-	protected enum Type {
-		STREAM, DATAGRAM, SEQ_PAQUET
-	};
-
+	
 	private BluetoothDevice remoteDevice = null;
-	private int remotePort = -1;
+	private int psm = -1;
 	protected NativeSocket nativeSocket = new NativeSocket();
 	protected InputStream inputStream = null;
 	protected OutputStream outputStream = null;
@@ -41,7 +37,7 @@ public abstract class L2capSocket implements Closeable {
 	 *            timeout. Not handled yet.
 	 * @throws IOException
 	 */
-	public void connect(BluetoothDevice remoteDevice, int remotePort,
+	public void connect(BluetoothDevice remoteDevice, int psm,
 			int timeout) throws IOException {
 		try {
 			nativeSocket.lock();
@@ -49,16 +45,16 @@ public abstract class L2capSocket implements Closeable {
 			if (nativeSocket.get() > 0) {
 				nativeClose();
 				this.remoteDevice = null;
-				this.remotePort = -1;
+				this.psm = -1;
 				inputStream = null;
 				outputStream = null;
 			}
 
 			getNativeSocket();
 
-			nativeConnect(remoteDevice.getAddress(), remotePort, timeout);
+			nativeConnect(remoteDevice.getAddress(), psm, timeout);
 			this.remoteDevice = remoteDevice;
-			this.remotePort = remotePort;
+			this.psm = psm;
 		} catch (InterruptedException e) {
 			throw new IOException(e.getMessage());
 		} finally {
@@ -116,8 +112,8 @@ public abstract class L2capSocket implements Closeable {
 	 * 
 	 * @return The remote port, or -1 if there's none.
 	 */
-	public int getRemotePort() {
-		return remotePort;
+	public int getPsm() {
+		return psm;
 	}
 
 	/**
@@ -135,7 +131,7 @@ public abstract class L2capSocket implements Closeable {
 			nativeSocket.lock();
 			nativeClose();
 			remoteDevice = null;
-			remotePort = -1;
+			psm = -1;
 			inputStream = null;
 			outputStream = null;
 		} catch (InterruptedException e) {
@@ -145,7 +141,7 @@ public abstract class L2capSocket implements Closeable {
 		}
 	}
 
-	protected abstract Type getSocketType();
+	protected abstract int getSocketType();
 
 	private native void getNativeSocket() throws IOException;
 

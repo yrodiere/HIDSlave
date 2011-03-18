@@ -3,5 +3,15 @@
     <string name="app_name">LibHidroid test app</string>
     <string name="do_test">Test it!</string>
     <string name="init_test_input">Hello!</string>
-    <string name="testBluetoothAddress">00:02:72:A4:7D:1F</string>
+    <string name="testOutputLabel">Test output</string>
+    <string name="testLogLabel">Logs</string>
+    <string name="init_test_log"></string>
+    <string name="testInputLabel">Message</string>
+    <string name="socketType_streaming">Streaming</string>
+    <string name="socketType_datagram">Datagram</string>
+    <string name="socketType_seqpacket">SeqPacket</string>
+    <string name="socketTypeLabel">Socket type NOT IMPL.</string>
+    <string name="psmLabel">PSM</string>
+    <string name="initTestPSM">4097</string>
+    <string name="chooseBondedDevice">Choose bonded device</string>
 </resources>

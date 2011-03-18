@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:orientation="vertical">
+	<LinearLayout android:id="@+id/linearLayout1"
+		android:layout_width="fill_parent" android:orientation="horizontal"
+		android:layout_height="wrap_content">
+		<TextView android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:id="@+id/textView1"
+			android:text="@string/testInputLabel" android:textStyle="bold"
+			android:textSize="20sp"></TextView>
+		<EditText android:id="@+id/testInput" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:text="@string/init_test_input"></EditText>
+	</LinearLayout>
+	<LinearLayout android:id="@+id/linearLayout2"
+		android:layout_width="fill_parent" android:orientation="horizontal"
+		android:layout_height="wrap_content">
+		<RadioGroup android:layout_width="fill_parent" android:id="@+id/socketType"
+			android:orientation="vertical" android:layout_weight="1"
+			android:layout_height="wrap_content">
+			<TextView android:textSize="20sp" android:textStyle="bold"
+				android:layout_height="wrap_content" android:id="@+id/textView3"
+				android:text="@string/socketTypeLabel" android:layout_width="wrap_content"></TextView>
+			<RadioButton android:checked="true"
+				android:layout_height="wrap_content" android:layout_width="wrap_content"
+				android:id="@+id/radio0" android:layout_weight="1"
+				android:text="@string/socketType_streaming"></RadioButton>
+			<RadioButton android:layout_height="wrap_content"
+				android:layout_width="wrap_content" android:id="@+id/radio1"
+				android:layout_weight="1" android:text="@string/socketType_datagram"></RadioButton>
+			<RadioButton android:layout_height="wrap_content"
+				android:layout_width="wrap_content" android:id="@+id/radio2"
+				android:layout_weight="1" android:text="@string/socketType_seqpacket"></RadioButton>
+		</RadioGroup>
+		<LinearLayout android:layout_weight="1" android:id="@+id/linearLayout3"
+			android:layout_width="fill_parent" android:layout_height="fill_parent"
+			android:orientation="vertical">
+			<TextView android:textSize="20sp" android:textStyle="bold"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:id="@+id/textView2" android:text="@string/psmLabel"></TextView>
+			<EditText android:layout_height="wrap_content"
+				android:layout_width="fill_parent" android:text="@string/initTestPSM"
+				android:digits="0123456789" android:id="@+id/psm"></EditText>
+		</LinearLayout>
+	</LinearLayout>
+	<Button android:text="@string/do_test" android:layout_width="fill_parent"
+		android:id="@+id/doTest" android:layout_height="wrap_content"
+		android:layout_weight="1"></Button>
+</LinearLayout>

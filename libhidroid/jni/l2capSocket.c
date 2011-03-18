@@ -33,8 +33,14 @@ void Java_net_hidroid_l2cap_L2capSocket_getNativeSocket(JNIEnv* env,
 		jobject thiz)
 {
 	int s;
-	//s = socket(AF_BLUETOOTH, SOCK_SEQPACKET, BTPROTO_L2CAP);
-	s = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_L2CAP);
+
+	s = socket(
+			AF_BLUETOOTH,
+			(*env)->CallIntMethod(
+					env,
+					thiz,
+					(*env)->GetMethodID(env, (*env)->GetObjectClass(env, thiz),
+							"getSocketType", "()I")), BTPROTO_L2CAP);
 
 	setCurrentSocket(env, thiz, s);
 	if (s < 0)
@@ -45,7 +51,7 @@ void Java_net_hidroid_l2cap_L2capSocket_getNativeSocket(JNIEnv* env,
 }
 
 void Java_net_hidroid_l2cap_L2capSocket_nativeConnect(JNIEnv* env,
-		jobject thiz, jstring remoteAddress, int remotePort, int timeout)
+		jobject thiz, jstring remoteAddress, int psm, int timeout)
 {
 	struct sockaddr_l2 addr =
 	{ 0 };
@@ -54,7 +60,7 @@ void Java_net_hidroid_l2cap_L2capSocket_nativeConnect(JNIEnv* env,
 
 	// Set up parameters
 	addr.l2_family = AF_BLUETOOTH;
-	addr.l2_psm = htobs(remotePort);
+	addr.l2_psm = htobs(psm);
 	addressCString = (*env)->GetStringUTFChars(env, remoteAddress, NULL);
 	str2ba(addressCString, &addr.l2_bdaddr);
 	(*env)->ReleaseStringUTFChars(env, remoteAddress, addressCString);
@@ -64,8 +70,8 @@ void Java_net_hidroid_l2cap_L2capSocket_nativeConnect(JNIEnv* env,
 	status = connect(s, (struct sockaddr *) &addr, sizeof(addr));
 	if (status < 0)
 	{
-		Throw(env, "java/io/IOException", "Could not connect with socket %d: %s",
-				s, strerror(errno));
+		Throw(env, "java/io/IOException",
+				"Could not connect with socket %d: %s", s, strerror(errno));
 	}
 }
 
@@ -84,4 +90,16 @@ void Java_net_hidroid_l2cap_L2capSocket_nativeClose(JNIEnv* env, jobject thiz)
 	{
 		setCurrentSocket(env, thiz, -1);
 	}
+}
+
+int Java_net_hidroid_l2cap_L2capStreamSocket_getSocketType(JNIEnv* env,
+		jobject thiz)
+{
+	return SOCK_STREAM;
+}
+
+int Java_net_hidroid_l2cap_L2capSeqPacketSocket_getSocketType(JNIEnv* env,
+		jobject thiz)
+{
+	return SOCK_SEQPACKET;
 }
