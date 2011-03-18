@@ -14,11 +14,16 @@ import android.bluetooth.BluetoothDevice;
  * @author fenrhil
  * @todo Allow to choose between datagrams, streams, etc.
  */
-public class L2capSocket implements Closeable {
-	private NativeSocket nativeSocket = new NativeSocket();
+public abstract class L2capSocket implements Closeable {
+	protected enum Type {
+		STREAM, DATAGRAM, SEQ_PAQUET
+	};
+
 	private BluetoothDevice remoteDevice = null;
-	private InputStream inputStream = new L2capInputStream(nativeSocket);
-	private OutputStream outputStream = new L2capOutputStream(nativeSocket);
+	private int remotePort = -1;
+	protected NativeSocket nativeSocket = new NativeSocket();
+	protected InputStream inputStream = null;
+	protected OutputStream outputStream = null;
 
 	/**
 	 * Attempt to connect to a remote device.
@@ -36,14 +41,24 @@ public class L2capSocket implements Closeable {
 	 *            timeout. Not handled yet.
 	 * @throws IOException
 	 */
-	public void connect(BluetoothDevice remoteDevice, int timeout)
-			throws IOException {
+	public void connect(BluetoothDevice remoteDevice, int remotePort,
+			int timeout) throws IOException {
 		try {
 			nativeSocket.lock();
-			if (nativeSocket.get() > 0)
+
+			if (nativeSocket.get() > 0) {
 				nativeClose();
+				this.remoteDevice = null;
+				this.remotePort = -1;
+				inputStream = null;
+				outputStream = null;
+			}
+
 			getNativeSocket();
-			nativeConnect(remoteDevice.getAddress(), timeout);
+
+			nativeConnect(remoteDevice.getAddress(), remotePort, timeout);
+			this.remoteDevice = remoteDevice;
+			this.remotePort = remotePort;
 		} catch (InterruptedException e) {
 			throw new IOException(e.getMessage());
 		} finally {
@@ -63,8 +78,7 @@ public class L2capSocket implements Closeable {
 	 */
 	public InputStream getInputStream() throws IOException {
 		if (inputStream == null) {
-			throw new IOException(
-					"No input stream available (This socket is not connected)");
+			throw new IOException("No input stream available");
 		} else {
 			return inputStream;
 		}
@@ -82,8 +96,7 @@ public class L2capSocket implements Closeable {
 	 */
 	public OutputStream getOutputStream() throws IOException {
 		if (outputStream == null) {
-			throw new IOException(
-					"No output stream available (This socket is not connected)");
+			throw new IOException("No output stream available");
 		} else {
 			return outputStream;
 		}
@@ -99,7 +112,17 @@ public class L2capSocket implements Closeable {
 	}
 
 	/**
-	 * Immediately close this socket, and release all associated resources.
+	 * Get the remote port associated with this socket.
+	 * 
+	 * @return The remote port, or -1 if there's none.
+	 */
+	public int getRemotePort() {
+		return remotePort;
+	}
+
+	/**
+	 * Immediately close this socket, and release all associated resources,
+	 * including input and output streams.
 	 * 
 	 * Causes blocked calls on this socket in other threads to immediately throw
 	 * an IOException.
@@ -111,6 +134,10 @@ public class L2capSocket implements Closeable {
 		try {
 			nativeSocket.lock();
 			nativeClose();
+			remoteDevice = null;
+			remotePort = -1;
+			inputStream = null;
+			outputStream = null;
 		} catch (InterruptedException e) {
 			throw new IOException(e.getMessage());
 		} finally {
@@ -118,10 +145,12 @@ public class L2capSocket implements Closeable {
 		}
 	}
 
+	protected abstract Type getSocketType();
+
 	private native void getNativeSocket() throws IOException;
 
-	private native void nativeConnect(String address, int timeout)
-			throws IOException;
+	private native void nativeConnect(String remoteAddress, int remotePort,
+			int timeout) throws IOException;
 
 	private native void nativeClose() throws IOException;
 

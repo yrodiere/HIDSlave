@@ -45,7 +45,7 @@ void Java_net_hidroid_l2cap_L2capSocket_getNativeSocket(JNIEnv* env,
 }
 
 void Java_net_hidroid_l2cap_L2capSocket_nativeConnect(JNIEnv* env,
-		jobject thiz, jstring address, int timeout)
+		jobject thiz, jstring remoteAddress, int remotePort, int timeout)
 {
 	struct sockaddr_l2 addr =
 	{ 0 };
@@ -54,17 +54,17 @@ void Java_net_hidroid_l2cap_L2capSocket_nativeConnect(JNIEnv* env,
 
 	// Set up parameters
 	addr.l2_family = AF_BLUETOOTH;
-	addr.l2_psm = htobs(0x1001);
-	addressCString = (*env)->GetStringUTFChars(env, address, NULL);
+	addr.l2_psm = htobs(remotePort);
+	addressCString = (*env)->GetStringUTFChars(env, remoteAddress, NULL);
 	str2ba(addressCString, &addr.l2_bdaddr);
-	(*env)->ReleaseStringUTFChars(env, address, addressCString);
+	(*env)->ReleaseStringUTFChars(env, remoteAddress, addressCString);
 
 	// Connect
 	s = getCurrentSocket(env, thiz);
 	status = connect(s, (struct sockaddr *) &addr, sizeof(addr));
 	if (status < 0)
 	{
-		Throw(env, "java/io/IOException", "Could not connect on socket %d: %s",
+		Throw(env, "java/io/IOException", "Could not connect with socket %d: %s",
 				s, strerror(errno));
 	}
 }
