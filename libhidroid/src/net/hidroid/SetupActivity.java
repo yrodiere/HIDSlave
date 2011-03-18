@@ -1,5 +1,7 @@
 package net.hidroid;
 
+import java.util.Set;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -11,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class SetupActivity extends Activity {
 	private EditText testInput = null;
@@ -73,15 +76,23 @@ public class SetupActivity extends Activity {
 					.getText().toString());
 
 			// Show remote device chooser dialog
-			BluetoothDevice[] devices = new BluetoothDevice[1];
-			devices = BluetoothAdapter.getDefaultAdapter().getBondedDevices()
-					.toArray(devices);
-			final CharSequence[] items = new CharSequence[devices.length];
-			for (int i = 0; i < devices.length; ++i) {
-				items[i] = devices[i].getName();
+			Set<BluetoothDevice> devicesSet = BluetoothAdapter
+					.getDefaultAdapter().getBondedDevices();
+			if (devicesSet.isEmpty()) {
+				Toast.makeText(getApplicationContext(), "Bluetooth is disabled, or no bonded device is available",
+						Toast.LENGTH_LONG).show();
+			} else {
+				BluetoothDevice[] devices = new BluetoothDevice[devicesSet
+						.size()];
+				devices = devicesSet.toArray(devices);
+				final CharSequence[] labels = new CharSequence[devices.length];
+				for (int i = 0; i < devices.length; ++i) {
+					labels[i] = devices[i].getName();
+				}
+				builder.setItems(labels, new ChosenDeviceListener(intent,
+						devices));
+				builder.create().show();
 			}
-			builder.setItems(items, new ChosenDeviceListener(intent, devices));
-			builder.create().show();
 		}
 	}
 }
