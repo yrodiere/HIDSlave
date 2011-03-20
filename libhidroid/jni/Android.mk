@@ -17,7 +17,7 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE    := hidroid
-LOCAL_SRC_FILES := l2capSocket.c l2capOutputStream.c l2capInputStream.c throw.c
+LOCAL_SRC_FILES := l2cap/L2capSocket.c l2cap/L2capOutputStream.c l2cap/L2capInputStream.c utils/throw.c
 LOCAL_LDLIBS    := -lbluetooth
 
 include $(BUILD_SHARED_LIBRARY)

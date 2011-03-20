@@ -65,8 +65,6 @@ public class SetupActivity extends Activity {
 		}
 
 		public void onClick(View v) {
-			// testOutput.setText(new L2capSocket().test());
-			// intent.putExtra("blah", OnTestRequestListener.class);
 			Intent intent = new Intent(getApplicationContext(),
 					TestActivity.class);
 
@@ -79,7 +77,9 @@ public class SetupActivity extends Activity {
 			Set<BluetoothDevice> devicesSet = BluetoothAdapter
 					.getDefaultAdapter().getBondedDevices();
 			if (devicesSet.isEmpty()) {
-				Toast.makeText(getApplicationContext(), "Bluetooth is disabled, or no bonded device is available",
+				Toast.makeText(
+						getApplicationContext(),
+						"Bluetooth is disabled, or no bonded device is available",
 						Toast.LENGTH_LONG).show();
 			} else {
 				BluetoothDevice[] devices = new BluetoothDevice[devicesSet

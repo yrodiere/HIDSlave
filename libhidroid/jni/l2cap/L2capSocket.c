@@ -5,7 +5,8 @@
 #include <bluetooth/bluetooth.h>
 #include <bluetooth/l2cap.h>
 #include <errno.h>
-#include "throw.h"
+
+#include "utils/throw.h"
 
 static int getCurrentSocket(JNIEnv* env, jobject thiz)
 {
