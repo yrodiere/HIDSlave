@@ -1,4 +1,6 @@
-package net.hidroid;
+package net.hidroid.test.l2cap;
+
+import net.hidroid.test.R;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
@@ -7,12 +9,12 @@ import android.os.Handler;
 import android.os.Message;
 import android.widget.TextView;
 
-public class TestActivity extends Activity {
+public class L2capTestActivity extends Activity {
 	static final String KEY_BLUETOOTH_WRITE_STRING = "written";
 	static final String KEY_BLUETOOTH_REMOTE_DEVICE = "remoteDevice";
 	static final String KEY_BLUETOOTH_PSM = "psm";
 
-	static final String KEY_USER_OUTPUT = "useroutput";
+	static final String KEY_USER_OUTPUT = "userOutput";
 	static final String KEY_LOG = "log";
 
 	private TextView testOutput = null;

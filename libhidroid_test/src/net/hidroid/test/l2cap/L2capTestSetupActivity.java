@@ -1,6 +1,8 @@
-package net.hidroid;
+package net.hidroid.test.l2cap;
 
 import java.util.Set;
+
+import net.hidroid.test.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -15,7 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class SetupActivity extends Activity {
+public class L2capTestSetupActivity extends Activity {
 	private EditText testInput = null;
 	private EditText psm = null;
 
@@ -56,9 +58,9 @@ public class SetupActivity extends Activity {
 			}
 
 			public void onClick(DialogInterface dialogInterface, int item) {
-				onClickIntent
-						.putExtra(TestActivity.KEY_BLUETOOTH_REMOTE_DEVICE,
-								devices[item]);
+				onClickIntent.putExtra(
+						L2capTestActivity.KEY_BLUETOOTH_REMOTE_DEVICE,
+						devices[item]);
 				startActivity(onClickIntent);
 				return;
 			}
@@ -66,12 +68,12 @@ public class SetupActivity extends Activity {
 
 		public void onClick(View v) {
 			Intent intent = new Intent(getApplicationContext(),
-					TestActivity.class);
+					L2capTestActivity.class);
 
-			intent.putExtra(TestActivity.KEY_BLUETOOTH_PSM,
+			intent.putExtra(L2capTestActivity.KEY_BLUETOOTH_PSM,
 					Integer.parseInt(psm.getText().toString()));
-			intent.putExtra(TestActivity.KEY_BLUETOOTH_WRITE_STRING, testInput
-					.getText().toString());
+			intent.putExtra(L2capTestActivity.KEY_BLUETOOTH_WRITE_STRING,
+					testInput.getText().toString());
 
 			// Show remote device chooser dialog
 			Set<BluetoothDevice> devicesSet = BluetoothAdapter

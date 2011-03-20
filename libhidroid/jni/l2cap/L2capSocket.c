@@ -104,3 +104,9 @@ int Java_net_hidroid_l2cap_L2capSeqPacketSocket_getSocketType(JNIEnv* env,
 {
 	return SOCK_SEQPACKET;
 }
+
+int Java_net_hidroid_l2cap_L2capDatagramSocket_getSocketType(JNIEnv* env,
+		jobject thiz)
+{
+	return SOCK_DGRAM;
+}

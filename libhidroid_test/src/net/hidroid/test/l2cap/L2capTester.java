@@ -1,4 +1,4 @@
-package net.hidroid;
+package net.hidroid.test.l2cap;
 
 import net.hidroid.l2cap.L2capSocket;
 import net.hidroid.l2cap.L2capStreamSocket;
@@ -53,7 +53,7 @@ class L2capTester extends Thread {
 	private void writeOutput(String string) {
 		Bundle guiBdl = new Bundle();
 		Message guiMsg = Message.obtain(guiHandler);
-		guiBdl.putString(TestActivity.KEY_USER_OUTPUT, string);
+		guiBdl.putString(L2capTestActivity.KEY_USER_OUTPUT, string);
 		guiMsg.setData(guiBdl);
 		guiMsg.sendToTarget();
 	}
@@ -61,7 +61,7 @@ class L2capTester extends Thread {
 	private void writeLog(String string) {
 		Bundle guiBdl = new Bundle();
 		Message guiMsg = Message.obtain(guiHandler);
-		guiBdl.putString(TestActivity.KEY_LOG, string);
+		guiBdl.putString(L2capTestActivity.KEY_LOG, string);
 		guiMsg.setData(guiBdl);
 		guiMsg.sendToTarget();
 	}

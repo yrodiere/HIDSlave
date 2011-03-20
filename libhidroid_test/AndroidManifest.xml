@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="net.hidroid.test"
+      android:versionCode="1"
+      android:versionName="1.0">
+    <uses-sdk android:minSdkVersion="7" />
+    <instrumentation android:targetPackage="net.hidroid" android:name="android.test.InstrumentationTestRunner" />
+    <uses-permission android:name="android.permission.BLUETOOTH"></uses-permission>
+    <application android:icon="@drawable/icon" android:label="@string/app_name">
+
+    <uses-library android:name="android.test.runner" />
+    <activity android:name=".l2cap.L2capTestSetupActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN"></action>
+            <category android:name="android.intent.category.LAUNCHER"></category>
+        </intent-filter>
+    </activity>
+    <activity android:name=".l2cap.L2capTestActivity"></activity>
+    </application>
+</manifest>
