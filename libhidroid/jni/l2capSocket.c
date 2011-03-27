@@ -16,7 +16,7 @@ jstring Java_net_hidroid_L2capSocket_test(JNIEnv* env, jobject thiz)
     struct sockaddr_l2 addr = { 0 };
     int s, status;
     char *message = "hello!";
-    char dest[18] = "00:02:72:A4:7D:1F";
+    char dest[18] = "00:10:60:A8:57:35"; // "00:02:72:A4:7D:1F";
 
     /*if(argc < 2)
     {
