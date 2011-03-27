@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">LibHidroid test app</string>
-    <string name="notinitialized">Not initialized</string>
-    <string name="do_test">Test it!</string>
-    <string name="init_test_input">1</string>
+    <string name="app_name">HIDroid Library</string>
 </resources>
