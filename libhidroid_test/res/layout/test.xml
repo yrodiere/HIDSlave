@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="vertical">
+	<TextView android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:id="@+id/textView1"
+		android:text="@string/testOutputLabel" android:textSize="20sp" android:textStyle="bold" android:layout_gravity="bottom"></TextView>
+	<TextView android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:layout_weight="1" android:id="@+id/testOutput" android:layout_gravity="top"/>
+	<TextView android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:id="@+id/textView2"
+		android:text="@string/testLogLabel" android:textSize="20sp" android:textStyle="bold" android:layout_gravity="top"></TextView>
+	<TextView android:layout_height="wrap_content" android:text="@string/init_test_log" android:id="@+id/testLog" android:layout_width="fill_parent"></TextView>
+</LinearLayout>
