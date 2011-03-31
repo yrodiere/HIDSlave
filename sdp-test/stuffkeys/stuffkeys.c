@@ -91,7 +91,7 @@ static int l2cap_connect(bdaddr_t *src, bdaddr_t *dst, unsigned short psm)
 	}
 
 	return sk;
-}
+}//*/
 
 static void stuff()
 {
@@ -148,7 +148,9 @@ static void stuff()
 	}
 
 	for (i = 0; i < NUMFDS; i++) {
+	    printf("polling ...\n");
 		if (pf[i].revents & POLLIN) {
+		printf("received events\n");
 
 			/* receive data */
 			len = recv(pf[i].fd, buf, BUFLEN, 0);
