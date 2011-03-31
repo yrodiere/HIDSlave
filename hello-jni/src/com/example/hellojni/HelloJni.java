@@ -43,7 +43,7 @@ public class HelloJni extends Activity
            p = Runtime.getRuntime().exec("su");   
           
            TextView  tv = new TextView(this);
-           Log.v("HelloJNI","ver. 42");
+           Log.v("HelloJNI","ver. 53");
            Log.v("HelloJNI","//////////////////////////////////////////////////");
            tv.setText( stringFromJNI() );
            Log.v("HelloJNI","//////////////////////////////////////////////////");
@@ -81,6 +81,7 @@ public class HelloJni extends Activity
      */
     
     public native String  stringFromJNI();
+
 
     /* This is another native method declaration that is *not*
      * implemented by 'hello-jni'. This is simply to show that
