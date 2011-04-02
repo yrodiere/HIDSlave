@@ -1,0 +1,386 @@
+HCI sniffer - Bluetooth packet analyzer ver 1.42
+device: hci0 snap_len: 1028 filter: 0xffffffffffffffff
+> HCI Event: Connect Request (0x04) plen 10
+  0000: de a4 a3 5e 26 00 00 01  48 01                    ...^&...H.
+< HCI Command: Accept Connection Request (0x01|0x0009) plen 7
+  0000: de a4 a3 5e 26 00 00                              ...^&..
+> HCI Event: Command Status (0x0f) plen 4
+  0000: 00 01 09 04                                       ....
+> HCI Event: Role Change (0x12) plen 8
+  0000: 00 de a4 a3 5e 26 00 00                           ....^&..
+> HCI Event: Connect Complete (0x03) plen 11
+  0000: 00 29 00 de a4 a3 5e 26  00 01 00                 .)....^&...
+< HCI Command: Read Remote Supported Features (0x01|0x001b) plen 2
+  0000: 29 00                                             ).
+> HCI Event: Page Scan Repetition Mode Change (0x20) plen 7
+  0000: de a4 a3 5e 26 00 00                              ...^&..
+> HCI Event: Command Status (0x0f) plen 4
+  0000: 00 00 1b 04                                       ....
+> HCI Event: Max Slots Change (0x1b) plen 3
+  0000: 29 00 05                                          )..
+> HCI Event: Command Status (0x0f) plen 4
+  0000: 00 01 00 00                                       ....
+< HCI Command: Change Connection Packet Type (0x01|0x000f) plen 4
+  0000: 29 00 18 cc                                       )...
+> HCI Event: Command Status (0x0f) plen 4
+  0000: 00 01 0f 04                                       ....
+< HCI Command: Remote Name Request (0x01|0x0019) plen 10
+  0000: de a4 a3 5e 26 00 02 00  00 00                    ...^&.....
+> HCI Event: Connection Packet Type Changed (0x1d) plen 5
+  0000: 00 29 00 18 cc                                    .)...
+> ACL data: handle 41 flags 0x02 dlen 10
+    L2CAP(s): Info req: type 2
+< ACL data: handle 41 flags 0x02 dlen 16
+    L2CAP(s): Info rsp: type 2 result 0
+      Extended feature mask 0x0080
+> HCI Event: Number of Completed Packets (0x13) plen 5
+  0000: 01 29 00 01 00                                    .)...
+> ACL data: handle 41 flags 0x02 dlen 10
+    L2CAP(s): Info req: type 3
+< ACL data: handle 41 flags 0x02 dlen 20
+    L2CAP(s): Info rsp: type 3 result 0
+      Unknown (len 8)
+> HCI Event: Read Remote Supported Features (0x0b) plen 11
+  0000: 00 29 00 ff fe 8f fe 9b  ff 79 83                 .).......y.
+> HCI Event: Command Status (0x0f) plen 4
+  0000: 00 01 19 04                                       ....
+> HCI Event: Number of Completed Packets (0x13) plen 5
+  0000: 01 29 00 01 00                                    .)...
+> ACL data: handle 41 flags 0x02 dlen 12
+    L2CAP(s): Connect req: psm 17 scid 0x0040
+< ACL data: handle 41 flags 0x02 dlen 16
+    L2CAP(s): Connect rsp: dcid 0x0040 scid 0x0040 result 1 status 0
+      Connection pending - No futher information available
+< ACL data: handle 41 flags 0x02 dlen 10
+    L2CAP(s): Info req: type 2
+> HCI Event: Number of Completed Packets (0x13) plen 5
+  0000: 01 29 00 01 00                                    .)...
+> HCI Event: Number of Completed Packets (0x13) plen 5
+  0000: 01 29 00 01 00                                    .)...
+> ACL data: handle 41 flags 0x02 dlen 16
+    L2CAP(s): Info rsp: type 2 result 0
+      Extended feature mask 0x0080
+< ACL data: handle 41 flags 0x02 dlen 10
+    L2CAP(s): Info req: type 3
+> HCI Event: Number of Completed Packets (0x13) plen 5
+  0000: 01 29 00 01 00                                    .)...
+> ACL data: handle 41 flags 0x02 dlen 20
+    L2CAP(s): Info rsp: type 3 result 0
+      Unknown (len 8)
+< ACL data: handle 41 flags 0x02 dlen 16
+    L2CAP(s): Connect rsp: dcid 0x0040 scid 0x0040 result 0 status 0
+      Connection successful
+> HCI Event: Number of Completed Packets (0x13) plen 5
+  0000: 01 29 00 01 00                                    .)...
+> ACL data: handle 41 flags 0x02 dlen 16
+    L2CAP(s): Config req: dcid 0x0040 flags 0x00 clen 4
+      MTU 48 
+< ACL data: handle 41 flags 0x02 dlen 18
+    L2CAP(s): Config rsp: scid 0x0040 flags 0x00 result 0 clen 4
+      MTU 48 
+< ACL data: handle 41 flags 0x02 dlen 12
+    L2CAP(s): Config req: dcid 0x0040 flags 0x00 clen 0
+> HCI Event: Number of Completed Packets (0x13) plen 5
+  0000: 01 29 00 01 00                                    .)...
+> HCI Event: Number of Completed Packets (0x13) plen 5
+  0000: 01 29 00 01 00                                    .)...
+> ACL data: handle 41 flags 0x02 dlen 18
+    L2CAP(s): Config rsp: scid 0x0040 flags 0x00 result 0 clen 4
+      MTU 672 
+> ACL data: handle 41 flags 0x02 dlen 12
+    L2CAP(s): Connect req: psm 19 scid 0x0041
+< ACL data: handle 41 flags 0x02 dlen 16
+    L2CAP(s): Connect rsp: dcid 0x0041 scid 0x0041 result 1 status 2
+      Connection pending - Authorization pending
+< ACL data: handle 41 flags 0x02 dlen 16
+    L2CAP(s): Connect rsp: dcid 0x0041 scid 0x0041 result 0 status 0
+      Connection successful
+> HCI Event: Number of Completed Packets (0x13) plen 5
+  0000: 01 29 00 01 00                                    .)...
+> HCI Event: Number of Completed Packets (0x13) plen 5
+  0000: 01 29 00 01 00                                    .)...
+> HCI Event: Remote Name Req Complete (0x07) plen 255
+  0000: 00 de a4 a3 5e 26 00 68  65 6c 6c 62 6f 79 73 2d  ....^&.hellboys-
+  0010: 4d 61 63 42 6f 6f 6b 41  69 72 2d 30 00 00 00 00  MacBookAir-0....
+  0020: 00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  ................
+  0030: 00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  ................
+  0040: 00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  ................
+  0050: 00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  ................
+  0060: 00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  ................
+  0070: 00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  ................
+  0080: 00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  ................
+  0090: 00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  ................
+  00a0: 00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  ................
+  00b0: 00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  ................
+  00c0: 00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  ................
+  00d0: 00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  ................
+  00e0: 00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  ................
+  00f0: 00 00 00 00 00 00 00 00  00 00 00 00 00 00 00     ...............
+> ACL data: handle 41 flags 0x02 dlen 16
+    L2CAP(s): Config req: dcid 0x0041 flags 0x00 clen 4
+      MTU 48 
+< ACL data: handle 41 flags 0x02 dlen 18
+    L2CAP(s): Config rsp: scid 0x0041 flags 0x00 result 0 clen 4
+      MTU 48 
+< ACL data: handle 41 flags 0x02 dlen 12
+    L2CAP(s): Config req: dcid 0x0041 flags 0x00 clen 0
+> HCI Event: Number of Completed Packets (0x13) plen 5
+  0000: 01 29 00 01 00                                    .)...
+> HCI Event: Number of Completed Packets (0x13) plen 5
+  0000: 01 29 00 01 00                                    .)...
+> ACL data: handle 41 flags 0x02 dlen 18
+    L2CAP(s): Config rsp: scid 0x0041 flags 0x00 result 0 clen 4
+      MTU 672 
+< HCI Command: Authentication Requested (0x01|0x0011) plen 2
+  0000: 29 00                                             ).
+> HCI Event: Command Status (0x0f) plen 4
+  0000: 00 01 11 04                                       ....
+> HCI Event: Link Key Request (0x17) plen 6
+  0000: de a4 a3 5e 26 00                                 ...^&.
+< HCI Command: Link Key Request Reply (0x01|0x000b) plen 22
+  0000: de a4 a3 5e 26 00 df 32  2d 45 d2 70 85 a2 3f 05  ...^&..2-E.p..?.
+  0010: aa 1d ec f1 4a a8                                 ....J.
+> HCI Event: Command Complete (0x0e) plen 10
+  0000: 01 0b 04 00 de a4 a3 5e  26 00                    .......^&.
+> HCI Event: Auth Complete (0x06) plen 3
+  0000: 00 29 00                                          .).
+< HCI Command: Set Connection Encryption (0x01|0x0013) plen 3
+  0000: 29 00 01                                          )..
+> HCI Event: Command Status (0x0f) plen 4
+  0000: 00 01 13 04                                       ....
+> HCI Event: Encrypt Change (0x08) plen 4
+  0000: 00 29 00 01                                       .)..
+< ACL data: handle 41 flags 0x02 dlen 15
+    L2CAP(d): cid 0x0041 len 11 [psm 19]
+      HIDP: Data: Output report
+      0000: 01 00 00 00 00 00 00 00  00 00                    ..........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 1a 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 00 00 00 00 00  00                       .........
+> HCI Event: Number of Completed Packets (0x13) plen 5
+  0000: 01 29 00 01 00                                    .)...
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 0b 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 00 00 00 00 00  00                       .........
+< ACL data: handle 41 flags 0x02 dlen 7
+    L2CAP(d): cid 0x0041 len 3 [psm 19]
+      HIDP: Data: Output report
+      0000: 01 01                                             ..
+> HCI Event: Number of Completed Packets (0x13) plen 5
+  0000: 01 29 00 01 00                                    .)...
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 12 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 00 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 2c 00 00 00 00  00                       ...,.....
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 00 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 12 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 00 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 1a 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 00 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 11 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 00 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 16 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 00 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 2c 00 00 00 00  00                       ...,.....
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 00 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 1c 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 00 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 12 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 00 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 18 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 00 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 15 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 00 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 2c 00 00 00 00  00                       ...,.....
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 00 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 0e 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 00 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 08 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 00 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 1c 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 00 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 16 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 00 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 17 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 00 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 15 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 00 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 12 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 00 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 0e 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 00 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 08 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 00 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 16 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 00 00 00 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 02 00 38 00 00 00 00  00                       ...8.....
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 02 00 00 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 02 00 28 00 00 00 00  00                       ...(.....
+> ACL data: handle 41 flags 0x02 dlen 14
+    L2CAP(d): cid 0x0041 len 10 [psm 19]
+      HIDP: Data: Input report
+      0000: 01 02 00 00 00 00 00 00  00                       .........
+> ACL data: handle 41 flags 0x02 dlen 12
+    L2CAP(s): Disconn req: dcid 0x0041 scid 0x0041
+< ACL data: handle 41 flags 0x02 dlen 12
+    L2CAP(s): Disconn rsp: dcid 0x0041 scid 0x0041
+> ACL data: handle 41 flags 0x02 dlen 12
+    L2CAP(s): Disconn req: dcid 0x0040 scid 0x0040
+< ACL data: handle 41 flags 0x02 dlen 12
+    L2CAP(s): Disconn rsp: dcid 0x0040 scid 0x0040
+> HCI Event: Number of Completed Packets (0x13) plen 5
+  0000: 01 29 00 01 00                                    .)...
+> HCI Event: Number of Completed Packets (0x13) plen 5
+  0000: 01 29 00 01 00                                    .)...
+> HCI Event: Disconn Complete (0x05) plen 4
+  0000: 00 29 00 13                                       .)..

@@ -31,6 +31,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/socket.h>
+#include <sys/poll.h>
 #include "bluetooth/bluetooth.h"
 #include "bluetooth/l2cap.h"
 #include "bluetooth/hci.h"
@@ -66,8 +67,21 @@ typedef struct {
 	uint16_t	clock_offset;
 } __attribute__ ((packed)) inquiry_info;
 
+#define NUMFDS 2
+#define BUFLEN 65536
+
+static const char* FD_NAMES[] = {
+	"control out",
+	"interrupt out",
+	"control in",
+	"interrupt in"
+};
+
+static const char ACK[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+
 int is = 0,  iss = 0, cs = 0, css = 0;
 char logmsg[256];
+
 
 
 void sendChar( char keycode)
@@ -85,9 +99,24 @@ void sendChar( char keycode)
     pkg[7] = 0x00;
     pkg[8] = 0x00;
     pkg[9] = 0x00;
+    
+    
+    // Mouse datagram
+    /*
+    pkg[0] = 0xa1;
+    pkg[1] = 0x02;
+    pkg[2] = 0x00; // modifiers ?
+    pkg[3] = 0xFF;
+    pkg[4] = 0xFF;
+    pkg[5] = 0x00;
+    pkg[6] = 0x00;
+    pkg[7] = 0x00;
+    pkg[8] = 0x00;
+    pkg[9] = 0x00;*/
+    
 
     //if ( write(is, pkg, 10) <= 0) {
-        ret = write(is, pkg, 12);
+        ret = send(is, pkg, 10, 0);
         
         if (errno == EBADF)
             LOGE("EBADF");
@@ -126,23 +155,6 @@ static int l2cap_connect(bdaddr_t *src, bdaddr_t *dst, unsigned short psm)
     // PF_BLUETOOTH vs. AF_BLUETOOTH ?? BTPROTO_L2CAP
 	if ((sk = socket(PF_BLUETOOTH, SOCK_SEQPACKET,  BTPROTO_L2CAP)) < 0)
 	{
-	    if(errno == EACCES)
-	        LOGE("EACCES");
-        if(errno == EAFNOSUPPORT)
-	        LOGE("EAFNOSUPPORT");
-        if(errno == EINVAL)
-	        LOGE("EINVAL");
-        if(errno == EMFILE)
-	        LOGE("EMFILE");
-        if(errno == ENFILE)
-	        LOGE("ENFILE");
-        if(errno == ENOBUFS)
-	        LOGE("ENOBUFS");
-        if(errno == ENOMEM)
-	        LOGE("ENOMEM");
-        if(errno == EPROTONOSUPPORT )
-	        LOGE("EPROTONOSUPPORT");
-
 	    sprintf ( logmsg, "HID EMUL : can't open socket bluetooth : errno : %d, return : %d", errno, sk );
         LOGE( logmsg );
 		return -1;
@@ -177,6 +189,7 @@ static int l2cap_connect(bdaddr_t *src, bdaddr_t *dst, unsigned short psm)
 	return sk;
 }
 
+
 /* This is a trivial JNI example where we use a native method
  * to return a new VM String. See the corresponding Java source
  * file located at:
@@ -188,17 +201,33 @@ Java_com_example_hellojni_HelloJni_stringFromJNI( JNIEnv* env,
                                                   jobject thiz )
 {
 
-    bdaddr_t dst;
+    bdaddr_t dst, src;
     char keycode;
+    int numrdy;
+    struct pollfd pf[NUMFDS];
+    int i, j, len;
+    unsigned char *buf;
+    
+    buf = malloc(BUFLEN);
+	if (!buf) {
+		perror("can't allocate buffer");
+		exit(1);
+	}
     
     str2ba("00:10:60:A8:57:35", &dst);
+    str2ba("C8:7E:75:51:46:D7", &src);
 
     LOGV("======================= Begin ====================");
+
+    //LOGV("Add SDP record");
+    
+    //sdp_open();
+	//sdp_add_keyboard();
 
     LOGV("connecting HID control channel to host");
     while(cs <= 0)
     {
-        cs = l2cap_connect(BDADDR_ANY, &dst, L2CAP_PSM_HIDP_CTRL);
+        cs = l2cap_connect(&src, &dst, L2CAP_PSM_HIDP_CTRL);
         if (cs < 0) {
 		    LOGE(" -> connect failed");
 		    sleep(1);
@@ -214,7 +243,7 @@ Java_com_example_hellojni_HelloJni_stringFromJNI( JNIEnv* env,
 
     while(is <= 0)
     {
-        is = l2cap_connect(BDADDR_ANY, &dst, L2CAP_PSM_HIDP_INTR);
+        is = l2cap_connect(&src, &dst, L2CAP_PSM_HIDP_INTR);
         if (is < 0) {
 	        LOGE(" -> connect failed");
 	        sleep(1);
@@ -226,10 +255,49 @@ Java_com_example_hellojni_HelloJni_stringFromJNI( JNIEnv* env,
         }
     }    
 
-    
+	pf[0].fd = cs;
+	pf[0].events = POLLIN;
+	pf[1].fd = is;
+	pf[1].events = POLLIN;
+
+    numrdy = poll(pf, NUMFDS, 1);
+	if (numrdy < 0) {
+		LOGE("poll failed");
+		exit(1);
+	}
+
+	for (i = 0; i < NUMFDS; i++) {
+		if (pf[i].revents & POLLIN) {
+
+			LOGV("receive data");
+			len = recv(pf[i].fd, buf, BUFLEN, 0);
+			if (len < 0) {
+				LOGE("recv failed");
+				exit(1);
+			} else if (len == 0) {
+				LOGW("disconnected\n");
+				continue;
+			}
+
+			/* print to screen */
+			sprintf(logmsg, "%-13s:", FD_NAMES[i]);
+			LOGV( logmsg );
+			for (j = 0; j < len; j++)
+				sprintf(logmsg[j], " %02x", buf[j]);
+			LOGV(logmsg);
+
+			/* ack it */
+			if (send(pf[0].fd, ACK, 10, 0) <= 0) {
+				LOGE("send failed");
+				exit(1);
+			}
+		}
+	}
+
+
     // from AndroHID : a=4, b=5, c= 6 ... 0=39
     
-    for( keycode = 4 ; keycode < 39; keycode++ )
+    for( keycode = 16 ; keycode < 100; keycode++ )
     {
 	    sprintf ( logmsg, "sending keycode %d", keycode);
         LOGV( logmsg );

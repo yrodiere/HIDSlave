@@ -314,7 +314,7 @@ void sdp_add_keyboard()
 	
 	
 	// Description
-	sdp_set_info_attr(sdp_record, "Yabde", 
+	sdp_set_info_attr(sdp_record, "droidHID", 
 		"gravitezero & fenrhil", "original code writer : http://www.mulliner.org/bluetooth/");
 
 	for (i = 0; i < sizeof(hid_attr)/2; i++) {
