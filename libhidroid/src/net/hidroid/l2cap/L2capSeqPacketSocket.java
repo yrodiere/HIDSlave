@@ -8,11 +8,15 @@ public class L2capSeqPacketSocket extends L2capSocket {
 	@Override
 	protected native int getSocketType();
 
+	/* (non-Javadoc)
+	 * @see net.hidroid.l2cap.L2capSocket#connect(android.bluetooth.BluetoothDevice, int, int)
+	 * TODO: fix input issue: read operation seems to be aborted in some way (instant return of 0).
+	 */
 	@Override
 	public void connect(BluetoothDevice remoteDevice, int psm,
 			int timeout) throws IOException {
 		super.connect(remoteDevice, psm, timeout);
-		inputStream = null;
+		inputStream = new L2capInputStream(nativeSocket);
 		outputStream = new L2capOutputStream(nativeSocket);
 	}
 

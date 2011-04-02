@@ -14,4 +14,9 @@
     <string name="psmLabel">PSM</string>
     <string name="initTestPSM">4097</string>
     <string name="chooseBondedDevice">Choose bonded device</string>
+    <string name="l2capMessageTypePrompt">Message type</string>
+    <string-array name="l2capMessageTypes">
+        <item>Custom</item>
+        <item>Test1</item>
+    </string-array>
 </resources>

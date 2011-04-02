@@ -1,29 +1,34 @@
 package net.hidroid.test.l2cap;
 
 import net.hidroid.l2cap.L2capSocket;
-import net.hidroid.l2cap.L2capStreamSocket;
+
+import java.util.Arrays;
 import android.bluetooth.BluetoothDevice;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
 class L2capTester extends Thread {
-	final BluetoothDevice device;
-	final int psm;
-	final String text;
+	private L2capSocket socket;
+	private final BluetoothDevice device;
+	private final int psm;
+	private final byte[] message;
+	private final boolean waitForResponse;
 
 	final Handler guiHandler;
 
-	public L2capTester(BluetoothDevice device, int psm, String text, Handler guiHandler) {
+	public L2capTester(L2capSocket socket, BluetoothDevice device, int psm,
+			byte[] message, boolean waitForResponse, Handler guiHandler) {
 		super();
+		this.socket = socket;
 		this.device = device;
 		this.psm = psm;
-		this.text = text;
+		this.message = message;
+		this.waitForResponse = waitForResponse;
 		this.guiHandler = guiHandler;
 	}
 
 	public void run() {
-		L2capSocket socket = new L2capStreamSocket();
 		try {
 			byte buffer[] = new byte[1024];
 			int nRead = 0;
@@ -31,14 +36,17 @@ class L2capTester extends Thread {
 			socket.connect(device, psm, 0);
 			writeLog("\n" + "Connected!");
 
-			socket.getOutputStream().write(text.getBytes());
+			socket.getOutputStream().write(message);
 			writeLog("\n" + "Written!");
-			writeLog("\n" + "Waiting...");
+			writeOutput("\nSent: " + Arrays.toString(message));
 
-			Thread.sleep(200); // Wait for a response
-			nRead = socket.getInputStream().read(buffer);
-			writeLog("\n" + String.format("Read %d bytes!", nRead));
-			writeOutput("\nResponse: " + new String(buffer, 0, nRead));
+			if (waitForResponse) {
+				writeLog("\n" + "Waiting...");
+				Thread.sleep(200); // Wait for a response
+				nRead = socket.getInputStream().read(buffer);
+				writeLog("\n" + String.format("Read %d bytes!", nRead));
+				writeOutput("\nResponse: " + new String(buffer, 0, nRead));
+			}
 		} catch (Exception e) {
 			writeLog("\nEXCEPTION CAUGHT while running: " + e.getMessage());
 		} finally {

@@ -9,9 +9,12 @@
 			android:layout_height="wrap_content" android:id="@+id/textView1"
 			android:text="@string/testInputLabel" android:textStyle="bold"
 			android:textSize="20sp"></TextView>
-		<EditText android:id="@+id/testInput" android:layout_width="fill_parent"
-			android:layout_height="wrap_content" android:text="@string/init_test_input"></EditText>
+		<Spinner android:layout_height="wrap_content"
+			android:layout_width="fill_parent" android:prompt="@string/l2capMessageTypePrompt" android:entries="@array/l2capMessageTypes" android:id="@+id/l2capMessageType"></Spinner>
 	</LinearLayout>
+	<EditText android:layout_height="wrap_content"
+		android:layout_width="fill_parent" android:text="@string/init_test_input"
+		android:id="@+id/testInput"></EditText>
 	<LinearLayout android:id="@+id/linearLayout2"
 		android:layout_width="fill_parent" android:orientation="horizontal"
 		android:layout_height="wrap_content">
@@ -23,14 +26,14 @@
 				android:text="@string/socketTypeLabel" android:layout_width="wrap_content"></TextView>
 			<RadioButton android:checked="true"
 				android:layout_height="wrap_content" android:layout_width="wrap_content"
-				android:id="@+id/radio0" android:layout_weight="1"
-				android:text="@string/socketType_streaming"></RadioButton>
+				android:layout_weight="1" android:text="@string/socketType_streaming"
+				android:id="@+id/streamingType"></RadioButton>
 			<RadioButton android:layout_height="wrap_content"
-				android:layout_width="wrap_content" android:id="@+id/radio1"
-				android:layout_weight="1" android:text="@string/socketType_datagram"></RadioButton>
+				android:layout_width="wrap_content" android:layout_weight="1"
+				android:text="@string/socketType_datagram" android:id="@+id/datagramType"></RadioButton>
 			<RadioButton android:layout_height="wrap_content"
-				android:layout_width="wrap_content" android:id="@+id/radio2"
-				android:layout_weight="1" android:text="@string/socketType_seqpacket"></RadioButton>
+				android:layout_width="wrap_content" android:layout_weight="1"
+				android:text="@string/socketType_seqpacket" android:id="@+id/seqpacketType"></RadioButton>
 		</RadioGroup>
 		<LinearLayout android:layout_weight="1" android:id="@+id/linearLayout3"
 			android:layout_width="fill_parent" android:layout_height="fill_parent"

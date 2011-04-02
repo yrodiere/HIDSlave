@@ -21,6 +21,7 @@ int main(int argc, char **argv)
 	// allocate socket
 	//s = socket(AF_BLUETOOTH, SOCK_SEQPACKET, BTPROTO_L2CAP);
 	s = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_L2CAP);
+	//s = socket(AF_BLUETOOTH, SOCK_DGRAM, BTPROTO_L2CAP); // NOT WORKING ("File descriptor in bad state") -> Needs ioctl ?
 	if (s < 0)
 	{
 		perror("Error while getting socket");

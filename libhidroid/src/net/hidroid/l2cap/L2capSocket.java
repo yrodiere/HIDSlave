@@ -13,7 +13,7 @@ import android.bluetooth.BluetoothDevice;
 /**
  * @author fenrhil
  */
-public abstract class L2capSocket implements Closeable {
+public abstract class L2capSocket extends Object implements Closeable {
 	
 	private BluetoothDevice remoteDevice = null;
 	private int psm = -1;
@@ -28,7 +28,7 @@ public abstract class L2capSocket implements Closeable {
 	 * or the connection fails. If this method returns without an exception then
 	 * this socket is now connected.
 	 * 
-	 * TODO Handle the 'timeout' parameter
+	 * TODO Handle the 'timeout' parameter in subclasses
 	 * 
 	 * @param remoteDevice
 	 *            the remote device to connect to.
