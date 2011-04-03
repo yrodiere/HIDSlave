@@ -39,7 +39,7 @@
 
 /* from original bluez hidp.h */
 #define HIDP_MINIMUM_MTU 48
-#define HIDP_DEFAULT_MTU 48
+#define HIDP_DEFAULT_MTU 185
 
 /* from stuffkeys.c but you can found it on one of the original bluez file ... maybe ...*/
 #define L2CAP_PSM_HIDP_CTRL 0x11
@@ -81,13 +81,12 @@ static const char ACK[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 
 int is = 0,  iss = 0, cs = 0, css = 0;
 char logmsg[256];
-
-
+int ret;
+unsigned char msg[12];
 
 void sendChar( char keycode)
 {
     unsigned char pkg[12];
-    int ret;
 
     pkg[0] = 0xa1;
     pkg[1] = 0x01;
@@ -142,7 +141,7 @@ void sendChar( char keycode)
 }
 
 
-static int l2cap_connect(bdaddr_t *src, bdaddr_t *dst, unsigned short psm)
+/*static int l2cap_connect(bdaddr_t *src, bdaddr_t *dst, unsigned short psm)
 {
 	struct sockaddr_l2 addr;
 	struct l2cap_options opts;
@@ -160,6 +159,44 @@ static int l2cap_connect(bdaddr_t *src, bdaddr_t *dst, unsigned short psm)
 		return -1;
     }
     
+	memset(&addr, 0, sizeof(addr));
+	addr.l2_family  = AF_BLUETOOTH;
+	bacpy(&addr.l2_bdaddr, src);
+
+	if (bind(sk, (struct sockaddr *) &addr, sizeof(addr)) < 0) {
+		close(sk);
+		return -1;
+	}
+
+	memset(&opts, 0, sizeof(opts));
+	opts.imtu = HIDP_DEFAULT_MTU;
+	opts.omtu = HIDP_DEFAULT_MTU;
+	opts.flush_to = 0xffff;
+
+	setsockopt(sk, SOL_L2CAP, L2CAP_OPTIONS, &opts, sizeof(opts));
+
+	memset(&addr, 0, sizeof(addr));
+	addr.l2_family  = AF_BLUETOOTH;
+	bacpy(&addr.l2_bdaddr, dst);
+	addr.l2_psm = htobs(psm);
+
+	if (connect(sk, (struct sockaddr *) &addr, sizeof(addr)) < 0) {
+		close(sk);
+		return -1;
+	}
+
+	return sk;
+}*/
+
+static int l2cap_connect(bdaddr_t *src, bdaddr_t *dst, unsigned short psm)
+{
+	struct sockaddr_l2 addr;
+	struct l2cap_options opts;
+	int sk;
+
+	if ((sk = socket(PF_BLUETOOTH, SOCK_SEQPACKET, BTPROTO_L2CAP)) < 0)
+		return -1;
+
 	memset(&addr, 0, sizeof(addr));
 	addr.l2_family  = AF_BLUETOOTH;
 	bacpy(&addr.l2_bdaddr, src);
@@ -237,7 +274,15 @@ Java_com_example_hellojni_HelloJni_stringFromJNI( JNIEnv* env,
             sprintf ( logmsg, " -> connected : cs = %d", cs );
             LOGV( logmsg );
         }
-    }
+    }    
+    
+    msg[0] = 0x10;
+    
+    
+    ret = send(cs, msg, 1, 0);
+    sprintf ( logmsg, "HID EMUL : sending NOP on ctrl chan, ret : %d", ret );
+    LOGE( logmsg );
+    
     
     LOGV("connecting HID interrupt channel to host");
 
@@ -253,7 +298,7 @@ Java_com_example_hellojni_HelloJni_stringFromJNI( JNIEnv* env,
             sprintf ( logmsg, " -> connected : is = %d", is );
             LOGV( logmsg );        
         }
-    }    
+    }
 
 	pf[0].fd = cs;
 	pf[0].events = POLLIN;
@@ -294,6 +339,7 @@ Java_com_example_hellojni_HelloJni_stringFromJNI( JNIEnv* env,
 		}
 	}
 
+    sleep(10);
 
     // from AndroHID : a=4, b=5, c= 6 ... 0=39
     
@@ -304,9 +350,11 @@ Java_com_example_hellojni_HelloJni_stringFromJNI( JNIEnv* env,
         
 	    sendChar(keycode); // key down
 	    sendChar(0); // key up
+	    sleep(1);
     }
     
 	close(is);
+	sleep(2);
 	close(cs);
 
     LOGV("======================== End =====================");
