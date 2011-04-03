@@ -2,7 +2,6 @@
  *
  *  BlueZ - Bluetooth protocol stack for Linux
  *
- *  Copyright (C) 2002-2003  Maxim Krasnyansky <maxk@qualcomm.com>
  *  Copyright (C) 2002-2008  Marcel Holtmann <marcel@holtmann.org>
  *
  *
@@ -22,41 +21,49 @@
  *
  */
 
-#ifndef __SCO_H
-#define __SCO_H
+#ifndef __CMTP_H
+#define __CMTP_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/* SCO defaults */
-#define SCO_DEFAULT_MTU		500
-#define SCO_DEFAULT_FLUSH_TO	0xFFFF
+/* CMTP defaults */
+#define CMTP_MINIMUM_MTU 152
+#define CMTP_DEFAULT_MTU 672
 
-#define SCO_CONN_TIMEOUT	(HZ * 40)
-#define SCO_DISCONN_TIMEOUT	(HZ * 2)
-#define SCO_CONN_IDLE_TIMEOUT	(HZ * 60)
+/* CMTP ioctl defines */
+#define CMTPCONNADD	_IOW('C', 200, int)
+#define CMTPCONNDEL	_IOW('C', 201, int)
+#define CMTPGETCONNLIST	_IOR('C', 210, int)
+#define CMTPGETCONNINFO	_IOR('C', 211, int)
 
-/* SCO socket address */
-struct sockaddr_sco {
-	sa_family_t	sco_family;
-	bdaddr_t	sco_bdaddr;
+#define CMTP_LOOPBACK	0
+
+struct cmtp_connadd_req {
+	int sock;	/* Connected socket */
+	uint32_t flags;
 };
 
-/* set/get sockopt defines */
-#define SCO_OPTIONS	0x01
-struct sco_options {
-	uint16_t	mtu;
+struct cmtp_conndel_req {
+	bdaddr_t bdaddr;
+	uint32_t flags;
 };
 
-#define SCO_CONNINFO	0x02
-struct sco_conninfo {
-	uint16_t	hci_handle;
-	uint8_t		dev_class[3];
+struct cmtp_conninfo {
+	bdaddr_t bdaddr;
+	uint32_t flags;
+	uint16_t state;
+	int      num;
+};
+
+struct cmtp_connlist_req {
+	uint32_t cnum;
+	struct cmtp_conninfo *ci;
 };
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __SCO_H */
+#endif /* __CMTP_H */

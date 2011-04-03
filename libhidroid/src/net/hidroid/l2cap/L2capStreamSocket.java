@@ -10,8 +10,8 @@ public class L2capStreamSocket extends L2capSocket {
 
 	@Override
 	public void connect(BluetoothDevice remoteDevice, int psm,
-			int timeout) throws IOException {
-		super.connect(remoteDevice, psm, timeout);
+			SockOptSetter setter, int timeout) throws IOException {
+		super.connect(remoteDevice, psm, setter, timeout);
 		inputStream = new L2capInputStream(nativeSocket);
 		outputStream = new L2capOutputStream(nativeSocket);
 	}

@@ -2,6 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent" android:layout_height="fill_parent"
 	android:orientation="vertical">
+	<Spinner android:layout_height="wrap_content" android:prompt="@string/l2capTestTypePrompt"
+		android:entries="@array/l2capTestTypes" android:layout_width="fill_parent" android:id="@+id/testType"></Spinner>
 	<LinearLayout android:id="@+id/linearLayout1"
 		android:layout_width="fill_parent" android:orientation="horizontal"
 		android:layout_height="wrap_content">
@@ -9,8 +11,6 @@
 			android:layout_height="wrap_content" android:id="@+id/textView1"
 			android:text="@string/testInputLabel" android:textStyle="bold"
 			android:textSize="20sp"></TextView>
-		<Spinner android:layout_height="wrap_content"
-			android:layout_width="fill_parent" android:prompt="@string/l2capMessageTypePrompt" android:entries="@array/l2capMessageTypes" android:id="@+id/l2capMessageType"></Spinner>
 	</LinearLayout>
 	<EditText android:layout_height="wrap_content"
 		android:layout_width="fill_parent" android:text="@string/init_test_input"

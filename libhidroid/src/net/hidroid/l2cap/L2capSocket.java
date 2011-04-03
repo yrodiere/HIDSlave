@@ -14,12 +14,22 @@ import android.bluetooth.BluetoothDevice;
  * @author fenrhil
  */
 public abstract class L2capSocket extends Object implements Closeable {
-	
 	private BluetoothDevice remoteDevice = null;
 	private int psm = -1;
 	protected NativeSocket nativeSocket = new NativeSocket();
 	protected InputStream inputStream = null;
 	protected OutputStream outputStream = null;
+
+	/**
+	 * Interface for objects settings socket options.
+	 * 
+	 * This interface is used in 'connect', where the setSockOpt method is
+	 * called just before connecting. When the setSockOpt method is called, the
+	 * socket is protected against concurrent access.
+	 */
+	public interface SockOptSetter {
+		public void setSockOpt(int CSocket);
+	}
 
 	/**
 	 * Attempt to connect to a remote device.
@@ -32,13 +42,17 @@ public abstract class L2capSocket extends Object implements Closeable {
 	 * 
 	 * @param remoteDevice
 	 *            the remote device to connect to.
+	 * @param psm
+	 *            the psm to be used.
+	 * @param setter
+	 *            a SockOptSetter to run before connecting.
 	 * @param timeout
 	 *            the timeout value in milliseconds or 0 for an infinite
 	 *            timeout. Not handled yet.
 	 * @throws IOException
 	 */
 	public void connect(BluetoothDevice remoteDevice, int psm,
-			int timeout) throws IOException {
+			SockOptSetter setter, int timeout) throws IOException {
 		try {
 			nativeSocket.lock();
 
@@ -52,6 +66,8 @@ public abstract class L2capSocket extends Object implements Closeable {
 
 			getNativeSocket();
 
+			setter.setSockOpt(nativeSocket.get());
+
 			nativeConnect(remoteDevice.getAddress(), psm, timeout);
 			this.remoteDevice = remoteDevice;
 			this.psm = psm;
@@ -60,6 +76,25 @@ public abstract class L2capSocket extends Object implements Closeable {
 		} finally {
 			nativeSocket.release();
 		}
+	}
+
+	/**
+	 * Attempt to connect to a remote device.
+	 * 
+	 * This is a convenience method for connecting without setting any socket
+	 * option.
+	 * 
+	 * @see L2capSocket.connect(BluetoothDevice remoteDevice, int psm,
+	 *      SockOptSetter setter, int timeout)
+	 */
+	public void connect(BluetoothDevice remoteDevice, int psm, int timeout)
+			throws IOException {
+		connect(remoteDevice, psm, new SockOptSetter() {
+			@Override
+			public void setSockOpt(int CSocket) {
+				// Do nothing
+			}
+		}, timeout);
 	}
 
 	/**

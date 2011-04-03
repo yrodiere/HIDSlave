@@ -9,12 +9,11 @@
     <application android:icon="@drawable/icon" android:label="@string/app_name">
 
     <uses-library android:name="android.test.runner" />
-    <activity android:name=".l2cap.L2capTestSetupActivity">
+    <activity android:name=".gui.L2capTestSetupActivity">
         <intent-filter>
             <action android:name="android.intent.action.MAIN"></action>
             <category android:name="android.intent.category.LAUNCHER"></category>
         </intent-filter>
     </activity>
-    <activity android:name=".l2cap.L2capTestActivity"></activity>
     </application>
 </manifest>
