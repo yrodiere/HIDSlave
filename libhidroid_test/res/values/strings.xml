@@ -18,6 +18,7 @@
     <string-array name="l2capTestTypes">
         <item>Custom</item>
         <item>Raw HID test</item>
+        <item>Keyboard HID test</item>
     </string-array>
     <string name="test_log">test</string>
 </resources>

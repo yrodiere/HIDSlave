@@ -463,18 +463,19 @@ Java_com_example_hellojni_HelloJni_stringFromJNI( JNIEnv* env,
 		exit(1);
 	}
     
-    str2ba("00:10:60:A8:57:35", &dst);
+    //str2ba("00:10:60:A8:57:35", &dst);
+	str2ba("00:02:72:A4:7D:1F", &dst);
     str2ba("C8:7E:75:51:46:D7", &src);
 
     LOGV("======================= Begin ====================");
 
-    LOGV("Add SDP record");
+    /*LOGV("Add SDP record");
     
     sdp_open();
     
     LOGV("Opened SDP record");
     
-	sdp_add_keyboard();
+	sdp_add_keyboard();*/
 
     LOGV("connecting HID control channel to host");
     while(cs <= 0)

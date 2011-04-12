@@ -1,17 +1,21 @@
 package net.hidroid.test.core;
 
 import java.util.Arrays;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.SynchronousQueue;
 
 import net.hidroid.hidp.HidpSockOptSetter;
 import net.hidroid.l2cap.L2capSocket;
 import android.bluetooth.BluetoothDevice;
 
-public class RawHidTester extends Tester {
+public class KeyboardHidTester extends Tester {
 	protected L2capSocket ctrlSocket = null;
 	protected L2capSocket intrSocket = null;
+	protected BlockingQueue<Byte> input = null;
 
-	public RawHidTester(String logTag) {
+	public KeyboardHidTester(String logTag) {
 		super(logTag);
+		this.input = new SynchronousQueue<Byte>();
 	}
 
 	@Override
@@ -21,7 +25,17 @@ public class RawHidTester extends Tester {
 
 	@Override
 	public MessageListener getMessageListener() {
-		return null;
+		return new MessageListener() {
+
+			@Override
+			public void onMessageChanged(byte[] newMessage) {
+				if (newMessage.length > 0) {
+					HIDASCIITranslator trans = new HIDASCIITranslator();
+					input.offer(new Byte(trans
+							.Translate(newMessage[newMessage.length - 1])));
+				}
+			}
+		};
 	}
 
 	@Override
@@ -43,8 +57,10 @@ public class RawHidTester extends Tester {
 
 	@Override
 	protected void doTest(BluetoothDevice remoteDevice) throws Exception {
-		final byte[] message = { (byte) 0xa1, 0x01, 0x00, 0x00, 0x0f, 0x00,
-				0x00, 0x00, 0x00, 0x00 };
+		final int KEYCODE_POS = 4;
+		byte[] message = { (byte) 0xa1, 0x01, 0x00, 0x00, 0x0f, 0x00, 0x00,
+				0x00, 0x00, 0x00 };
+
 		int psm;
 
 		psm = 0x11;
@@ -61,8 +77,8 @@ public class RawHidTester extends Tester {
 		intrSocket.connect(remoteDevice, psm, new HidpSockOptSetter(), 0);
 		log("Connected!");
 
-		for (byte b = 4; b < 39; ++b) {
-			message[4] = b;
+		while (true) {
+			message[KEYCODE_POS] = input.take();
 			log("Trying to send: " + Arrays.toString(message));
 			intrSocket.getOutputStream().write(message);
 			log("Sent!");

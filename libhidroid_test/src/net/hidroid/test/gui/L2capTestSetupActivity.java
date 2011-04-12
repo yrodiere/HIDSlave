@@ -6,6 +6,7 @@ import net.hidroid.l2cap.L2capDatagramSocket;
 import net.hidroid.l2cap.L2capSeqPacketSocket;
 import net.hidroid.l2cap.L2capStreamSocket;
 import net.hidroid.test.R;
+import net.hidroid.test.core.KeyboardHidTester;
 import net.hidroid.test.core.L2capTester;
 import net.hidroid.test.core.RawHidTester;
 import net.hidroid.test.core.Tester;
@@ -61,6 +62,7 @@ public class L2capTestSetupActivity extends Activity {
 		Tester[] testers = new Tester[testType.getCount()];
 		testers[0] = new L2capTester(getString(R.string.test_log));
 		testers[1] = new RawHidTester(getString(R.string.test_log));
+		testers[2] = new KeyboardHidTester(getString(R.string.test_log));
 		// TODO : add other testers
 
 		testType.setOnItemSelectedListener(new OnTestTypeSelectedListener(
@@ -114,8 +116,8 @@ public class L2capTestSetupActivity extends Activity {
 							socketTypeListener);
 					socketType.setOnCheckedChangeListener(listener);
 					// Update the tester using the new listener
-					listener.onCheckedChanged(socketType,
-							socketType.getCheckedRadioButtonId());
+					listener.onCheckedChanged(socketType, socketType
+							.getCheckedRadioButtonId());
 				} else {
 					socketType.setOnCheckedChangeListener(null);
 				}
@@ -241,19 +243,21 @@ public class L2capTestSetupActivity extends Activity {
 		private Pair<CharSequence[], BluetoothDevice[]> getBondedDevices() {
 			BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
 			if (adapter == null) {
-				Toast.makeText(
-						getApplicationContext(),
-						"Bluetooth does not seem to be supported on this device.",
-						Toast.LENGTH_LONG).show();
+				Toast
+						.makeText(
+								getApplicationContext(),
+								"Bluetooth does not seem to be supported on this device.",
+								Toast.LENGTH_LONG).show();
 				return null;
 			}
 
 			Set<BluetoothDevice> devicesSet = adapter.getBondedDevices();
 			if (devicesSet.isEmpty()) {
-				Toast.makeText(
-						getApplicationContext(),
-						"Bluetooth is disabled, or no bonded device is available",
-						Toast.LENGTH_LONG).show();
+				Toast
+						.makeText(
+								getApplicationContext(),
+								"Bluetooth is disabled, or no bonded device is available",
+								Toast.LENGTH_LONG).show();
 				return null;
 			}
 
