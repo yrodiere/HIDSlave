@@ -31,8 +31,9 @@ public class KeyboardHidTester extends Tester {
 			public void onMessageChanged(byte[] newMessage) {
 				if (newMessage.length > 0) {
 					HIDASCIITranslator trans = new HIDASCIITranslator();
-					input.offer(new Byte(trans
-							.Translate(newMessage[newMessage.length - 1])));
+					Byte keycode = new Byte(
+							trans.Translate(newMessage[newMessage.length - 1]));
+					input.offer(keycode);
 				}
 			}
 		};
@@ -78,7 +79,14 @@ public class KeyboardHidTester extends Tester {
 		log("Connected!");
 
 		while (true) {
+			// Send "key pressed" message
 			message[KEYCODE_POS] = input.take();
+			log("Trying to send: " + Arrays.toString(message));
+			intrSocket.getOutputStream().write(message);
+			log("Sent!");
+
+			// Send "key released" message
+			message[KEYCODE_POS] = 0;
 			log("Trying to send: " + Arrays.toString(message));
 			intrSocket.getOutputStream().write(message);
 			log("Sent!");
